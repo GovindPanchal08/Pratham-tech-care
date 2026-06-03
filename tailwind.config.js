@@ -1,0 +1,113 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        bg: 'var(--bg)',
+        'bg-subtle': 'var(--bg-subtle)',
+        'text-primary': 'var(--text-primary)',
+        'text-secondary': 'var(--text-secondary)',
+        accent: {
+          DEFAULT: 'var(--accent)',
+          subtle: 'var(--accent-subtle)',
+        },
+        border: 'var(--border)',
+        brand: {
+          50:  '#eef2ff',
+          100: '#e0e7ff',
+          200: '#c7d2fe',
+          300: '#a5b4fc',
+          400: '#818cf8',
+          500: '#6366f1',
+          600: '#4f46e5',
+          700: '#4338ca',
+          800: '#3730a3',
+          900: '#312e81',
+          950: '#1e1b4b',
+        },
+        slate: {
+          50:  '#f8fafc',
+          100: '#f1f5f9',
+          200: '#e2e8f0',
+          300: '#cbd5e1',
+          400: '#94a3b8',
+          500: '#64748b',
+          600: '#475569',
+          700: '#334155',
+          800: '#1e293b',
+          900: '#0f172a',
+          950: '#020617',
+        },
+      },
+      fontFamily: {
+        sans:     ['Inter', 'sans-serif'],
+        headings: ['"Plus Jakarta Sans"', 'sans-serif'],
+        display:  ['"Plus Jakarta Sans"', 'sans-serif'],
+        body:     ['Inter', 'sans-serif'],
+        mono:     ['monospace'],
+      },
+      fontSize: {
+        '2xs': ['0.625rem', { lineHeight: '1rem' }],
+        xs:   ['0.75rem',  { lineHeight: '1rem' }],
+        sm:   ['0.875rem', { lineHeight: '1.25rem' }],
+        base: ['1rem',     { lineHeight: '1.5rem' }],
+        lg:   ['1.125rem', { lineHeight: '1.75rem' }],
+        xl:   ['1.25rem',  { lineHeight: '1.75rem' }],
+        '2xl':['1.5rem',   { lineHeight: '2rem' }],
+        '3xl':['1.875rem', { lineHeight: '2.25rem' }],
+        '4xl':['2.25rem',  { lineHeight: '2.5rem' }],
+        '5xl':['3rem',     { lineHeight: '1.1' }],
+        '6xl':['3.75rem',  { lineHeight: '1.05' }],
+        '7xl':['4.5rem',   { lineHeight: '1' }],
+        '8xl':['6rem',     { lineHeight: '1' }],
+      },
+      spacing: {
+        18: '4.5rem',
+        22: '5.5rem',
+        30: '7.5rem',
+      },
+      maxWidth: {
+        '8xl': '88rem',
+        '9xl': '96rem',
+      },
+      borderRadius: {
+        '4xl': '2rem',
+        '5xl': '2.5rem',
+      },
+      boxShadow: {
+        'card':   '0 1px 3px 0 rgb(0 0 0 / 0.04), 0 1px 2px -1px rgb(0 0 0 / 0.04)',
+        'card-md':'0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05)',
+        'card-lg':'0 10px 15px -3px rgb(0 0 0 / 0.06), 0 4px 6px -4px rgb(0 0 0 / 0.06)',
+        'card-xl':'0 20px 25px -5px rgb(0 0 0 / 0.07), 0 8px 10px -6px rgb(0 0 0 / 0.07)',
+        'brand':  '0 0 0 3px rgb(99 102 241 / 0.2)',
+        'glow':   '0 0 40px rgb(99 102 241 / 0.15)',
+      },
+      animation: {
+        'fade-up':   'fadeUp 0.6s ease-out forwards',
+        'fade-in':   'fadeIn 0.4s ease-out forwards',
+        'slide-in':  'slideIn 0.5s ease-out forwards',
+        'pulse-slow':'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      },
+      keyframes: {
+        fadeUp: {
+          '0%':   { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        fadeIn: {
+          '0%':   { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideIn: {
+          '0%':   { opacity: '0', transform: 'translateX(-20px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+      },
+      backgroundImage: {
+        'grid-slate': 'url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 32 32\' width=\'32\' height=\'32\' fill=\'none\' stroke=\'rgb(15 23 42 / 0.04)\'%3e%3cpath d=\'M0 .5H31.5V32\'/%3e%3c/svg%3e")',
+        'grid-light': 'url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 32 32\' width=\'32\' height=\'32\' fill=\'none\' stroke=\'rgb(148 163 184 / 0.12)\'%3e%3cpath d=\'M0 .5H31.5V32\'/%3e%3c/svg%3e")',
+      },
+    },
+  },
+  plugins: [],
+}

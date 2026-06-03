@@ -1,0 +1,30 @@
+export const SITE_CONFIG = {
+  name: 'Pratham Tech Care',
+  tagline: 'Enterprise IT Solutions',
+  shortName: 'PTC',
+  description:
+    'Pratham Tech Care delivers enterprise-grade IT infrastructure, managed services, cybersecurity, and cloud solutions trusted by businesses across India.',
+  url: 'https://prathamtechcare.com',
+  email: 'info@prathamtechcare.com',
+  phone: '+91 98765 43210',
+  phone2: '+91 98765 43211',
+  address: {
+    line1: '4th Floor, Tech Park, Andheri East',
+    line2: 'Mumbai, Maharashtra 400069',
+    city: 'Mumbai',
+    state: 'Maharashtra',
+    country: 'India',
+    pin: '400069',
+  },
+  social: {
+    linkedin: 'https://linkedin.com/company/prathamtechcare',
+    twitter: 'https://twitter.com/prathamtechcare',
+    facebook: 'https://facebook.com/prathamtechcare',
+    youtube: 'https://youtube.com/@prathamtechcare',
+  },
+  founded: '2012',
+  employees: '150+',
+  projects: '500+',
+  clients: '200+',
+  uptime: '99.9%',
+};
