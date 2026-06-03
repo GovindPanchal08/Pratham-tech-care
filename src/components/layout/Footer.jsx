@@ -1,17 +1,24 @@
 import { Link } from 'react-router-dom';
-import { Cpu, Phone, Mail, MapPin, Linkedin, Twitter, Facebook, Youtube } from 'lucide-react';
+import { Cpu, Phone, Mail, MapPin } from 'lucide-react';
 import { SITE_CONFIG } from '../../constants/siteConfig';
 import { FOOTER_LINKS } from '../../constants/navigation';
+import {
+  FaLinkedin,
+  FaTwitter,
+  FaFacebook,
+  FaYoutube
+} from "react-icons/fa";
 
 export default function Footer() {
   const year = new Date().getFullYear();
-
   const socialIcons = {
-    LinkedIn: Linkedin,
-    Twitter: Twitter,
-    Facebook: Facebook,
-    YouTube: Youtube,
+    LinkedIn: FaLinkedin,
+    Twitter: FaTwitter,
+    Facebook: FaFacebook,
+    YouTube: FaYoutube,
   };
+
+
 
   return (
     <footer className="bg-bg-subtle border-t border-border text-text-secondary">
@@ -22,7 +29,7 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-5">
               <Cpu className="text-accent shrink-0" size={24} strokeWidth={1.5} />
-              <span className="font-headings font-bold text-text-primary text-lg tracking-tight">
+              <span  className="font-headings font-bold text-text-primary text-lg tracking-tight">
                 Pratham Tech Care
               </span>
             </Link>
