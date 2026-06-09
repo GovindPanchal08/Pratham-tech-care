@@ -5,11 +5,47 @@ import { Cpu, Phone, Menu, X, ChevronDown } from 'lucide-react';
 import { NAV_LINKS } from '../../constants/navigation';
 import { SITE_CONFIG } from '../../constants/siteConfig';
 
+// function Logo() {
+//   return (
+//     <Link to="/" className="flex items-center gap-2.5 group" aria-label={SITE_CONFIG.name}>
+//       {/* icon mark */}
+//       <div className="relative w-8 h-8 shrink-0">
+//         {/* outer ring */}
+//         <div className="absolute inset-0 rounded-xl bg-accent/10 group-hover:bg-accent/15 transition-colors duration-200" />
+//         {/* inner dot grid — 2x2 */}
+//         <div className="absolute inset-0 flex items-center justify-center">
+//           <div className="grid grid-cols-2 gap-[3px]">
+//             <div className="w-[7px] h-[7px] rounded-[2px] bg-accent" />
+//             <div className="w-[7px] h-[7px] rounded-[2px] bg-accent/40" />
+//             <div className="w-[7px] h-[7px] rounded-[2px] bg-accent/40" />
+//             <div className="w-[7px] h-[7px] rounded-[2px] bg-accent" />
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* wordmark */}
+//       <div className="flex flex-col leading-none gap-[3px]">
+//         <span className="font-headings font-extrabold text-text-primary text-[15px] tracking-tight">
+//           Pratham
+//         </span>
+//         <span className="font-sans font-medium text-text-tertiary text-[10px] tracking-[0.15em] uppercase">
+//           Tech Care
+//         </span>
+//       </div>
+//     </Link>
+//   );
+// }
 function Logo() {
   return (
-    <Link to="/" className="flex items-center gap-2 group" aria-label={SITE_CONFIG.name}>
-      <Cpu className="text-accent shrink-0" size={24} strokeWidth={1.5} />
-      <span className="font-headings font-bold text-text-primary text-lg tracking-tight">
+    <Link to="/" className="flex items-center gap-2.5 group" aria-label={SITE_CONFIG.name}>
+      {/* mark — two overlapping squares, offset */}
+      <div className="relative shrink-0 w-[22px] h-[22px]">
+        <div className="absolute top-0 left-0 w-[14px] h-[14px] rounded-[3px] bg-accent" />
+        <div className="absolute bottom-0 right-0 w-[14px] h-[14px] rounded-[3px] border-2 border-accent bg-transparent group-hover:bg-accent/10 transition-colors duration-200" />
+      </div>
+
+      {/* wordmark */}
+      <span className="font-headings font-bold text-[15px] text-text-primary tracking-[-0.03em]">
         Pratham Tech Care
       </span>
     </Link>
@@ -21,7 +57,7 @@ function DropdownMenu({ items }) {
   const dropdownVariants = {
     hidden: { opacity: 0, y: 6 },
     visible: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: 6 }
+    exit: { opacity: 0, y: 6 },
   };
   const transition = shouldReduce ? { duration: 0 } : { duration: 0.16, ease: 'easeOut' };
 
@@ -79,13 +115,14 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        scrolled
-          ? 'bg-bg/95 backdrop-blur-sm border-b border-border'
-          : 'bg-transparent'
+        scrolled ? 'bg-bg/95 backdrop-blur-sm border-b border-border' : 'bg-transparent'
       }`}
     >
       <div className="container-xl">
-        <nav className="flex items-center justify-between h-16 lg:h-18" aria-label="Main navigation">
+        <nav
+          className="flex items-center justify-between h-16 lg:h-18"
+          aria-label="Main navigation"
+        >
           <Logo />
 
           {/* Desktop nav */}
@@ -114,9 +151,7 @@ export default function Navbar() {
                       />
                     </button>
                     <AnimatePresence>
-                      {activeDropdown === link.path && (
-                        <DropdownMenu items={link.children} />
-                      )}
+                      {activeDropdown === link.path && <DropdownMenu items={link.children} />}
                     </AnimatePresence>
                   </div>
                 ) : (
@@ -152,7 +187,7 @@ export default function Navbar() {
             >
               <Link
                 to="/contact"
-                className="btn-primary py-2 px-4 rounded-lg font-sans font-semibold text-sm"
+                className="btn-primary py-2 px-4 rounded-full font-sans font-semibold text-sm"
               >
                 Get a Quote
               </Link>

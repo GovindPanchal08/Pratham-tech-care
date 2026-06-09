@@ -1,6 +1,8 @@
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
+import ProtectedRoute from '../components/common/ProtectedRoute';
+import AdminLayout from '../layouts/AdminLayout';
 
 // Lazy-loaded pages for code splitting
 const HomePage         = lazy(() => import('../pages/Home'));
@@ -11,6 +13,17 @@ const ClientsPage      = lazy(() => import('../pages/Clients'));
 const TestimonialsPage = lazy(() => import('../pages/Testimonials'));
 const ContactPage      = lazy(() => import('../pages/Contact'));
 const NotFoundPage     = lazy(() => import('../pages/NotFound'));
+
+// Admin pages
+const AdminLoginPage         = lazy(() => import('../pages/Admin/Login'));
+const AdminDashboardPage     = lazy(() => import('../pages/Admin/Dashboard'));
+const AdminServicesPage      = lazy(() => import('../pages/Admin/ServicesManager'));
+const AdminSubServicesPage   = lazy(() => import('../pages/Admin/SubServicesManager'));
+const AdminSupportPlansPage  = lazy(() => import('../pages/Admin/SupportPlansManager'));
+const AdminTestimonialsPage  = lazy(() => import('../pages/Admin/TestimonialsManager'));
+const AdminStatsPage         = lazy(() => import('../pages/Admin/StatsManager'));
+const AdminAuditLogsPage     = lazy(() => import('../pages/Admin/AuditLogsViewer'));
+const AdminUsersPage         = lazy(() => import('../pages/Admin/UserManager'));
 
 function PageLoader() {
   return (
@@ -44,6 +57,46 @@ const router = createBrowserRouter([
       { path: 'testimonials',   element: withSuspense(TestimonialsPage) },
       { path: 'contact',        element: withSuspense(ContactPage) },
       { path: '*',              element: withSuspense(NotFoundPage) },
+    ],
+  },
+  {
+    path: '/admin/login',
+    element: withSuspense(AdminLoginPage),
+  },
+  {
+    path: '/admin',
+    element: (
+      <ProtectedRoute>
+        <AdminLayout />
+      </ProtectedRoute>
+    ),
+    children: [
+      { index: true, element: withSuspense(AdminDashboardPage) },
+      { path: 'services', element: withSuspense(AdminServicesPage) },
+      { path: 'sub-services', element: withSuspense(AdminSubServicesPage) },
+      { path: 'support-plans', element: withSuspense(AdminSupportPlansPage) },
+      { path: 'testimonials', element: withSuspense(AdminTestimonialsPage) },
+      { path: 'stats', element: withSuspense(AdminStatsPage) },
+      { 
+        path: 'audit-logs', 
+        element: (
+          <ProtectedRoute allowedRoles={['super_admin', 'admin']}>
+            <Suspense fallback={<PageLoader />}>
+              <AdminAuditLogsPage />
+            </Suspense>
+          </ProtectedRoute>
+        )
+      },
+      { 
+        path: 'users', 
+        element: (
+          <ProtectedRoute allowedRoles={['super_admin']}>
+            <Suspense fallback={<PageLoader />}>
+              <AdminUsersPage />
+            </Suspense>
+          </ProtectedRoute>
+        )
+      },
     ],
   },
 ]);

@@ -1,33 +1,20 @@
 import { motion, useReducedMotion } from 'framer-motion';
-import {
-  Network,
-  Server,
-  ShieldCheck,
-  HardDrive,
-  Activity,
-  Headphones,
-  Check
-} from 'lucide-react';
+import * as LucideIcons from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
+import { supabase, isSupabaseConfigured } from '../../services/supabase';
 
 import SEOHead from '../../components/common/SEOHead';
 import PageHero from '../../components/common/PageHero';
 import SectionHeader from '../../components/common/SectionHeader';
 import CTABanner from '../../components/sections/CTABanner';
 import { SEO } from '../../constants/seo';
-import { INFRASTRUCTURE_SERVICES, SUPPORT_PLANS } from '../../constants/services';
-
-const iconMap = {
-  Network,
-  Server,
-  ShieldCheck,
-  HardDrive,
-  Activity,
-  Headphones
-};
+import {
+  INFRASTRUCTURE_SERVICES as STATIC_INFRASTRUCTURE_SERVICES,
+  SUPPORT_PLANS as STATIC_SUPPORT_PLANS,
+} from '../../constants/services';
 
 function DynamicIcon({ name, size = 20, strokeWidth = 1.5, className }) {
-  const IconComponent = iconMap[name];
-  if (!IconComponent) return null;
+  const IconComponent = LucideIcons[name] || LucideIcons.HelpCircle;
   return <IconComponent size={size} strokeWidth={strokeWidth} className={className} />;
 }
 

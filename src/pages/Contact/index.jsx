@@ -1,7 +1,17 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Phone, Mail, MapPin, Clock, CheckCircle, Shield, Loader2, SendHorizontal } from 'lucide-react';
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Clock,
+  CheckCircle,
+  Shield,
+  Loader2,
+  SendHorizontal,
+  ArrowUpRight,
+} from 'lucide-react';
 import SEOHead from '../../components/common/SEOHead';
 import PageHero from '../../components/common/PageHero';
 import { FormField, TextInput, TextArea, SelectInput } from '../../components/forms/FormComponents';
@@ -13,7 +23,7 @@ const iconMap = {
   Phone,
   Mail,
   MapPin,
-  Clock
+  Clock,
 };
 
 function ContactInfoCard({ item }) {
@@ -21,18 +31,28 @@ function ContactInfoCard({ item }) {
 
   const inner = (
     <div className="flex items-start gap-4">
-      <div className="w-10 h-10 rounded-md bg-accent-subtle text-accent flex items-center justify-center shrink-0">
-        {IconComponent && <IconComponent size={20} strokeWidth={1.5} />}
+      {/* icon */}
+      <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center shrink-0 group-hover:bg-accent/15 transition-colors duration-200">
+        {IconComponent && <IconComponent size={18} strokeWidth={1.5} className="text-accent" />}
       </div>
-      <div>
-        <div className="text-xs font-mono font-semibold uppercase tracking-widest text-text-secondary/50 mb-1">
+
+      {/* content */}
+      <div className="flex-1 min-w-0">
+        <p className="text-[10px] font-semibold tracking-widest uppercase text-text-tertiary mb-1">
           {item.label}
-        </div>
-        <div className="text-sm font-semibold text-text-primary">{item.value}</div>
+        </p>
+        <p className="text-sm font-semibold text-text-primary truncate">{item.value}</p>
         {item.value2 && (
-          <div className="text-sm text-text-secondary mt-0.5">{item.value2}</div>
+          <p className="text-xs text-text-secondary mt-0.5 truncate">{item.value2}</p>
         )}
       </div>
+
+      {/* arrow — only on linked cards */}
+      {item.href && (
+        <div className="w-6 h-6 rounded-full border border-border flex items-center justify-center shrink-0 opacity-0 group-hover:opacity-100 group-hover:border-accent/40 group-hover:bg-accent/5 transition-all duration-200 mt-0.5">
+          <ArrowUpRight size={12} className="text-accent" />
+        </div>
+      )}
     </div>
   );
 
@@ -42,15 +62,16 @@ function ContactInfoCard({ item }) {
         href={item.href}
         target={item.href.startsWith('http') ? '_blank' : undefined}
         rel="noopener noreferrer"
-        className="card p-5 hover:border-accent group block"
+        className="group relative flex bg-bg border border-border rounded-2xl p-5 overflow-hidden hover:border-accent/30 transition-colors duration-200"
       >
+        <div className="absolute top-0 left-5 right-5 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         {inner}
       </a>
     );
   }
-  return <div className="card p-5 bg-bg">{inner}</div>;
-}
 
+  return <div className="flex bg-bg-subtle border border-border rounded-2xl p-5">{inner}</div>;
+}
 function SuccessState({ onReset }) {
   return (
     <motion.div
@@ -61,16 +82,12 @@ function SuccessState({ onReset }) {
       <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mb-5">
         <CheckCircle size={32} className="text-emerald-600" strokeWidth={1.5} />
       </div>
-      <h3 className="font-headings text-xl font-bold text-text-primary mb-2">
-        Message Received!
-      </h3>
+      <h3 className="font-headings text-xl font-bold text-text-primary mb-2">Message Received!</h3>
       <p className="text-text-secondary text-sm max-w-sm mb-6">
-        Thank you for reaching out. One of our consultants will contact you within 24 business hours.
+        Thank you for reaching out. One of our consultants will contact you within 24 business
+        hours.
       </p>
-      <button
-        onClick={onReset}
-        className="btn-secondary text-sm"
-      >
+      <button onClick={onReset} className="btn-secondary text-sm">
         Send Another Message
       </button>
     </motion.div>
@@ -232,7 +249,8 @@ function ContactForm() {
       </button>
 
       <p className="text-xs text-text-secondary/60 text-center">
-        By submitting this form you agree to our Privacy Policy. We never share your data with third parties.
+        By submitting this form you agree to our Privacy Policy. We never share your data with third
+        parties.
       </p>
     </form>
   );
@@ -259,7 +277,8 @@ export default function ContactPage() {
                   Get in Touch
                 </h2>
                 <p className="text-sm text-text-secondary leading-relaxed">
-                  Our team of enterprise IT consultants is available during business hours and for emergency support 24×7.
+                  Our team of enterprise IT consultants is available during business hours and for
+                  emergency support 24×7.
                 </p>
               </div>
 
@@ -292,7 +311,8 @@ export default function ContactPage() {
                     Send Us a Message
                   </h2>
                   <p className="text-sm text-text-secondary">
-                    Fill out the form and a consultant will reach out to you within 24 business hours.
+                    Fill out the form and a consultant will reach out to you within 24 business
+                    hours.
                   </p>
                 </div>
                 <ContactForm />

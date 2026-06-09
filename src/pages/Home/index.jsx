@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useAnimationControls, useReducedMotion } from 'framer-motion';
 import {
   Server,
   Settings,
@@ -22,17 +22,20 @@ import {
   Home as HomeIcon,
   ArrowRight,
   ChevronRight,
-  Star
+  Star,
+  ArrowUpRight,
 } from 'lucide-react';
 
 import SEOHead from '../../components/common/SEOHead';
 import SectionHeader from '../../components/common/SectionHeader';
 import CTABanner from '../../components/sections/CTABanner';
+import heroImg from '../../assets/hero.png';
 import { SEO } from '../../constants/seo';
 import { SERVICES } from '../../constants/services';
 import { TESTIMONIALS } from '../../constants/testimonials';
 import { CLIENTS, INDUSTRIES } from '../../constants/clients';
 import { WHY_CHOOSE_US, TECH_STACK } from '../../constants/theme';
+import React from 'react';
 
 const iconMap = {
   Server,
@@ -53,7 +56,7 @@ const iconMap = {
   ShoppingCart,
   Truck,
   Hotel,
-  Home: HomeIcon
+  Home: HomeIcon,
 };
 
 function DynamicIcon({ name, size = 20, strokeWidth = 1.5, className }) {
@@ -70,90 +73,122 @@ function Hero() {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: shouldReduce ? 0 : 0.07
-      }
-    }
+        staggerChildren: shouldReduce ? 0 : 0.07,
+      },
+    },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 16 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
   };
 
   return (
-    <section className="relative bg-bg border-b border-border py-20 lg:py-28 overflow-hidden">
+    <section className="relative bg-bg  py-12 lg:py-20 overflow-hidden">
       <div className="container-xl">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="max-w-4xl text-left md:text-center lg:text-left mx-auto lg:mx-0"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center"
         >
-          {/* Eyebrow */}
-          <motion.div variants={itemVariants} className="inline-flex items-center gap-2 mb-6">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
-            <span className="text-xs font-sans font-medium tracking-widest uppercase text-text-secondary">
-              Trusted by 200+ enterprises across India
-            </span>
-          </motion.div>
-
-          {/* H1 */}
-          <motion.h1
-            variants={itemVariants}
-            className="font-headings text-5xl lg:text-6xl font-extrabold text-text-primary tracking-tight leading-[1.05]"
-          >
-            Enterprise IT Solutions
-            <br />
-            Built for Reliability.
-          </motion.h1>
-
-          {/* Subtext */}
-          <motion.p
-            variants={itemVariants}
-            className="mt-6 text-lg lg:text-xl text-text-secondary leading-relaxed max-w-2xl md:mx-auto lg:mx-0"
-          >
-            Pratham Tech Care delivers enterprise IT infrastructure, managed services, cybersecurity, and cloud solutions engineered for uptime and scale.
-          </motion.p>
-
-          {/* Buttons */}
-          <motion.div
-            variants={itemVariants}
-            className="mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-start md:justify-center lg:justify-start gap-3"
-          >
-            <motion.div
-              whileHover={shouldReduce ? {} : { scale: 1.02 }}
-              whileTap={shouldReduce ? {} : { scale: 0.98 }}
-              transition={{ duration: 0.15 }}
+          {/* Left Column: Content */}
+          <div className="lg:col-span-7 flex flex-col justify-center text-left">
+            {/* Title */}
+            <motion.h1
+              variants={itemVariants}
+              className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text-primary tracking-tight leading-[1.1] mb-6"
             >
-              <Link to="/contact" className="btn-primary">
+              Enterprise IT Solutions Built for Reliability.
+            </motion.h1>
+
+            {/* Subtext */}
+            <motion.p
+              variants={itemVariants}
+              className="text-sm sm:text-base text-text-secondary leading-relaxed max-w-xl mb-8 font-sans"
+            >
+              Pratham Tech Care delivers enterprise IT infrastructure, managed services,
+              cybersecurity, and cloud solutions engineered for uptime and scale.
+            </motion.p>
+
+            {/* Buttons */}
+            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-4 mb-10">
+              <Link
+                to="/contact"
+                className="px-6 py-3 bg-accent hover:bg-accent/80 text-white dark:bg-accent dark:hover:bg-accent/80 dark:text-white font-sans font-bold text-sm rounded-full transition-all duration-150 shadow-md active:scale-[0.98]"
+              >
                 Get a Free Consultation
-                <ArrowRight size={16} strokeWidth={1.5} />
               </Link>
-            </motion.div>
-            <motion.div
-              whileHover={shouldReduce ? {} : { scale: 1.02 }}
-              whileTap={shouldReduce ? {} : { scale: 0.98 }}
-              transition={{ duration: 0.15 }}
-            >
-              <Link to="/services" className="btn-ghost">
+              <Link
+                to="/services"
+                className="px-6 py-3  text-slate-900 border border-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-white dark:border-slate-700 font-sans font-bold text-sm rounded-full transition-all duration-150 active:scale-[0.98]"
+              >
                 Explore Services
-                <ChevronRight size={16} strokeWidth={1.5} />
               </Link>
             </motion.div>
-          </motion.div>
 
-          {/* Stat Chips */}
-          <motion.div
-            variants={itemVariants}
-            className="mt-14 pt-8 border-t border-border flex flex-wrap gap-x-6 gap-y-3 justify-start md:justify-center lg:justify-start text-xs font-mono text-text-secondary/65"
-          >
-            <span>500+ Projects</span>
-            <span>·</span>
-            <span>12 Years</span>
-            <span>·</span>
-            <span>99.9% Uptime</span>
-            <span>·</span>
-            <span>200+ Clients</span>
+            {/* Stats Row */}
+            <motion.div
+              variants={itemVariants}
+              className="grid grid-cols-2 sm:grid-cols-4 gap-2  pt-3 sm:pt-10"
+            >
+              <div>
+                <div className="font-display text-2xl sm:text-3xl font-semibold text-text-primary">
+                  540+
+                </div>
+                <div className="text-[10px] sm:text-xs font-semibold text-text-secondary mt-1">
+                  Projects
+                </div>
+              </div>
+              <div>
+                <div className="font-display text-2xl sm:text-3xl font-semibold text-text-primary">
+                  12+
+                </div>
+                <div className="text-[10px] sm:text-xs font-semibold text-text-secondary mt-1">
+                  Years of Experience``
+                </div>
+              </div>
+              <div>
+                <div className="font-display text-2xl sm:text-3xl font-semibold text-text-primary">
+                  99.9%
+                </div>
+                <div className="text-[10px] sm:text-xs font-semibold text-text-secondary mt-1">
+                  Uptime
+                </div>
+              </div>
+              <div>
+                <div className="font-display text-2xl sm:text-3xl font-semibold text-text-primary">
+                  200+
+                </div>
+                <div className="text-[10px] sm:text-xs font-semibold text-text-secondary mt-1">
+                  Clients
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Right Column: Hero Image */}
+          <motion.div variants={itemVariants} className="lg:col-span-5 relative w-full">
+            <div className="relative rounded-3xl overflow-hidden aspect-[4/3] sm:aspect-[1.4/1] lg:aspect-[1.15/1] border border-border shadow-sm group/hero-img">
+              <img
+                src={heroImg}
+                alt="Finding the right talent"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src =
+                    'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1000&auto=format&fit=crop&q=80';
+                }}
+                className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover/hero-img:scale-103"
+              />
+              {/* Pinterest-style Link Indicator in Bottom-Right */}
+              <Link
+                to="/contact"
+                title="Get in Touch"
+                className="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-white text-slate-900 flex items-center justify-center shadow-lg transition-all duration-200 hover:scale-110 cursor-pointer z-10 hover:bg-slate-50 border border-slate-100"
+              >
+                <ArrowUpRight className="rotate-180 text-slate-900" size={18} strokeWidth={2.5} />
+              </Link>
+            </div>
           </motion.div>
         </motion.div>
       </div>
@@ -169,14 +204,14 @@ function ServicesGrid() {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: shouldReduce ? 0 : 0.07
-      }
-    }
+        staggerChildren: shouldReduce ? 0 : 0.07,
+      },
+    },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 16 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
   };
 
   return (
@@ -191,15 +226,12 @@ function ServicesGrid() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: '-100px' }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
         >
           {SERVICES.map((service) => (
             <motion.div key={service.id} variants={itemVariants}>
-              <Link
-                to={service.path}
-                className="card-hover flex flex-col h-full p-6 lg:p-7"
-              >
+              <Link to={service.path} className="card-hover flex flex-col h-full p-6 lg:p-7">
                 <div className="w-10 h-10 rounded-md bg-accent-subtle text-accent flex items-center justify-center mb-5">
                   <DynamicIcon name={service.icon} />
                 </div>
@@ -224,20 +256,13 @@ function ServicesGrid() {
 // ─── Why Choose Us ────────────────────────────────────────────────────────────
 function WhyUs() {
   const shouldReduce = useReducedMotion();
+  const highlights = WHY_CHOOSE_US.slice(0, 3);
 
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: shouldReduce ? 0 : 0.07
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 16 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } }
-  };
+  const proofPoints = [
+    { value: '200+', label: 'Businesses Served' },
+    { value: '4hr', label: 'Avg. Response Time' },
+    { value: '8+', label: 'Years of Experience' },
+  ];
 
   return (
     <section className="section-padding bg-bg-subtle border-y border-border">
@@ -245,26 +270,71 @@ function WhyUs() {
         <SectionHeader
           tag="Why Pratham Tech Care"
           title="The IT Partner You Can Rely On"
-          subtitle="We combine deep technical expertise with a genuine commitment to your business outcomes. Here's what sets us apart."
+          subtitle="Deep expertise. Real commitment. Measurable outcomes."
         />
+
         <motion.div
-          variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          viewport={{ once: true, margin: '-80px' }}
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: shouldReduce ? 0 : 0.1 } },
+          }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-5"
         >
-          {WHY_CHOOSE_US.map((item) => (
-            <motion.div key={item.title} variants={itemVariants} className="card p-6">
-              <div className="w-10 h-10 rounded-md bg-accent-subtle text-accent flex items-center justify-center mb-4">
-                <DynamicIcon name={item.icon} />
+          {highlights.map((item, i) => (
+            <motion.div
+              key={item.title}
+              variants={
+                shouldReduce
+                  ? {}
+                  : {
+                      hidden: { opacity: 0, y: 16 },
+                      visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
+                    }
+              }
+              whileHover={shouldReduce ? {} : { y: -4, transition: { duration: 0.2 } }}
+              className="group relative bg-bg rounded-2xl border border-border p-8 overflow-hidden hover:border-accent/30 transition-colors duration-200 flex flex-col"
+            >
+              {/* top glow line */}
+              <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+              {/* icon + number */}
+              <div className="flex items-start justify-between mb-6">
+                <div className="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center group-hover:bg-accent/15 transition-colors duration-200 shrink-0">
+                  <DynamicIcon name={item.icon} size={20} className="text-accent" />
+                </div>
+                <span className="text-xs font-semibold tracking-widest text-text-tertiary">
+                  0{i + 1}
+                </span>
               </div>
-              <h3 className="font-headings font-semibold text-text-primary text-base mb-2">
+
+              {/* title + description */}
+              <h3 className="font-headings font-semibold text-text-primary text-base mb-2 leading-snug">
                 {item.title}
               </h3>
-              <p className="text-sm text-text-secondary leading-relaxed">
+              <p className="text-sm text-text-secondary leading-relaxed flex-1">
                 {item.description}
               </p>
+
+              {/* proof point */}
+              <div className="mt-8 pt-5 border-t border-border flex items-center justify-between">
+                <div>
+                  <p className="text-2xl font-headings font-bold text-text-primary leading-none mb-1">
+                    {proofPoints[i].value}
+                  </p>
+                  <p className="text-xs text-text-secondary font-medium">{proofPoints[i].label}</p>
+                </div>
+                {/* subtle arrow indicator */}
+                <div className="w-8 h-8 rounded-full border border-border flex items-center justify-center group-hover:border-accent/40 group-hover:bg-accent/5 transition-colors duration-200">
+                  <DynamicIcon
+                    name="ArrowUpRight"
+                    size={14}
+                    className="text-text-tertiary group-hover:text-accent transition-colors duration-200"
+                  />
+                </div>
+              </div>
             </motion.div>
           ))}
         </motion.div>
@@ -274,7 +344,6 @@ function WhyUs() {
 }
 
 // ─── Industries ────────────────────────────────────────────────────────────────
-// Pill tags only in Industries section
 function Industries() {
   const shouldReduce = useReducedMotion();
 
@@ -286,21 +355,38 @@ function Industries() {
           title="Deep Expertise Across Verticals"
           subtitle="Our solutions are tailored to the unique compliance, security, and operational requirements of each industry."
         />
+
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={shouldReduce ? { duration: 0 } : { duration: 0.4, ease: 'easeOut' }}
+          transition={shouldReduce ? { duration: 0 } : { duration: 0.3 }}
           className="flex flex-wrap gap-2.5 max-w-4xl"
         >
-          {INDUSTRIES.map((industry) => (
-            <div
+          {INDUSTRIES.map((industry, i) => (
+            <motion.div
               key={industry.name}
-              className="inline-flex items-center gap-2 px-4 py-2 border border-border rounded-full text-sm font-sans font-medium text-text-primary bg-bg hover:bg-accent-subtle hover:border-accent hover:text-accent transition-all duration-150 cursor-default"
+              initial={{ opacity: 0, scale: 0.94 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              whileHover={shouldReduce ? {} : { y: -2 }}
+              whileTap={shouldReduce ? {} : { scale: 0.97 }}
+              viewport={{ once: true }}
+              transition={
+                shouldReduce
+                  ? { duration: 0 }
+                  : { duration: 0.25, delay: i * 0.035, ease: 'easeOut' }
+              }
+              className="group inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-bg hover:border-accent/50 hover:bg-accent/5 transition-colors duration-200 cursor-default"
             >
-              <DynamicIcon name={industry.icon} size={16} className="text-accent" />
-              <span>{industry.name}</span>
-            </div>
+              <DynamicIcon
+                name={industry.icon}
+                size={14}
+                className="text-text-tertiary group-hover:text-accent transition-colors duration-200"
+              />
+              <span className="text-sm font-medium text-text-secondary group-hover:text-text-primary transition-colors duration-200">
+                {industry.name}
+              </span>
+            </motion.div>
           ))}
         </motion.div>
       </div>
@@ -310,36 +396,189 @@ function Industries() {
 
 // ─── Tech Stack ────────────────────────────────────────────────────────────────
 function TechExpertise() {
+  const shouldReduce = useReducedMotion();
+
   return (
-    <section className="section-padding bg-bg-subtle border-y border-border">
+    <section className="section-padding bg-bg border-y border-border">
       <div className="container-xl">
-        <SectionHeader
-          tag="Technology Expertise"
-          title="We Work With the Best"
-          subtitle="Our certified engineers are proficient with leading technology platforms across networking, servers, cloud, and security."
-        />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {TECH_STACK.map((category) => (
-            <div
-              key={category.category}
-              className="bg-bg border border-border rounded-lg p-5"
+        {/* header — Stripe/Linear style left-aligned with right side descriptor */}
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16">
+          <SectionHeader
+            tag={'Technology Expertise'}
+            title={'We Work With the Best '}
+            subtitle={
+              'Our certified engineers are proficient with leading technology platforms across networking, servers, cloud, and security.'
+            }
+          />
+        </div>
+
+        {/* masonry — asymmetric 2 col on left, 1 tall on right */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: shouldReduce ? 0 : 0.07 } },
+          }}
+          className="grid grid-cols-1 lg:grid-cols-3 gap-4"
+        >
+          {/* left col — 2 stacked */}
+          <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {TECH_STACK.slice(0, 4).map((category, i) => (
+              <motion.div
+                key={category.category}
+                variants={
+                  shouldReduce
+                    ? {}
+                    : {
+                        hidden: { opacity: 0, y: 14 },
+                        visible: {
+                          opacity: 1,
+                          y: 0,
+                          transition: { duration: 0.35, ease: 'easeOut' },
+                        },
+                      }
+                }
+                whileHover={shouldReduce ? {} : { y: -3, transition: { duration: 0.18 } }}
+                className="group relative bg-bg-subtle border border-border rounded-2xl p-6 overflow-hidden hover:border-accent/25 transition-colors duration-200"
+              >
+                <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-accent/35 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                <div className="flex items-start justify-between mb-4">
+                  <h3 className="font-headings font-semibold text-text-primary text-sm leading-snug">
+                    {category.category}
+                  </h3>
+                  <span className="text-[10px] font-semibold tracking-widest text-text-tertiary">
+                    0{i + 1}
+                  </span>
+                </div>
+
+                <div className="flex flex-wrap gap-1.5">
+                  {category.items.map((item) => (
+                    <span
+                      key={item}
+                      className="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-medium bg-bg border border-border text-text-secondary group-hover:text-text-primary transition-colors duration-150"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* right col — 1 tall feature card */}
+          {TECH_STACK[4] && (
+            <motion.div
+              variants={
+                shouldReduce
+                  ? {}
+                  : {
+                      hidden: { opacity: 0, y: 14 },
+                      visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
+                    }
+              }
+              whileHover={shouldReduce ? {} : { y: -3, transition: { duration: 0.18 } }}
+              className="group relative bg-accent rounded-2xl p-7 overflow-hidden flex flex-col lg:row-span-2"
             >
-              <div className="font-mono text-xs font-semibold tracking-widest uppercase text-accent mb-4">
-                {category.category}
+              {/* background texture */}
+              <div
+                className="absolute inset-0 opacity-10"
+                style={{
+                  backgroundImage:
+                    'radial-gradient(circle at 20% 20%, white 1px, transparent 1px), radial-gradient(circle at 80% 80%, white 1px, transparent 1px)',
+                  backgroundSize: '32px 32px',
+                }}
+              />
+              <div className="absolute -bottom-16 -right-16 w-48 h-48 rounded-full bg-white/5" />
+              <div className="absolute -top-8 -left-8 w-32 h-32 rounded-full bg-white/5" />
+
+              <div className="relative flex flex-col flex-1">
+                <div className="flex items-start justify-between mb-8">
+                  <span className="text-[10px] font-semibold tracking-widest uppercase text-white/60">
+                    0{TECH_STACK.indexOf(TECH_STACK[4]) + 1}
+                  </span>
+                  <div className="w-8 h-8 rounded-lg bg-white/15 flex items-center justify-center">
+                    <DynamicIcon
+                      name={TECH_STACK[4].icon ?? 'Shield'}
+                      size={15}
+                      className="text-white"
+                    />
+                  </div>
+                </div>
+
+                <h3 className="font-headings font-bold text-white text-xl leading-snug mb-3">
+                  {TECH_STACK[4].category}
+                </h3>
+                <p className="text-sm text-white/70 leading-relaxed mb-8">
+                  Enterprise-grade solutions built on industry-leading platforms.
+                </p>
+
+                <div className="flex flex-wrap gap-2 flex-1">
+                  {TECH_STACK[4].items.map((item) => (
+                    <span
+                      key={item}
+                      className="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-medium bg-white/10 border border-white/15 text-white/90"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="mt-8 pt-5 border-t border-white/15 flex items-center justify-between">
+                  <p className="text-xs text-white/60">{TECH_STACK[4].items.length} platforms</p>
+                  <div className="w-7 h-7 rounded-full bg-white/15 flex items-center justify-center">
+                    <DynamicIcon name="ArrowUpRight" size={13} className="text-white" />
+                  </div>
+                </div>
               </div>
-              <div className="flex flex-wrap gap-2">
-                {category.items.map((item) => (
+            </motion.div>
+          )}
+
+          {/* bottom wide card — if 6th category exists */}
+          {TECH_STACK[5] && (
+            <motion.div
+              variants={
+                shouldReduce
+                  ? {}
+                  : {
+                      hidden: { opacity: 0, y: 14 },
+                      visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
+                    }
+              }
+              whileHover={shouldReduce ? {} : { y: -3, transition: { duration: 0.18 } }}
+              className="group relative lg:col-span-2 bg-bg-subtle border border-border rounded-2xl p-6 overflow-hidden hover:border-accent/25 transition-colors duration-200"
+            >
+              <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-accent/35 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-5">
+                <div>
+                  <span className="text-[10px] font-semibold tracking-widest text-text-tertiary block mb-1.5">
+                    0{TECH_STACK.length}
+                  </span>
+                  <h3 className="font-headings font-semibold text-text-primary text-sm">
+                    {TECH_STACK[5].category}
+                  </h3>
+                </div>
+                <span className="text-xs text-text-tertiary shrink-0">
+                  {TECH_STACK[5].items.length} technologies
+                </span>
+              </div>
+
+              <div className="flex flex-wrap gap-1.5">
+                {TECH_STACK[5].items.map((item) => (
                   <span
                     key={item}
-                    className="text-xs font-mono px-2.5 py-1 rounded border border-border bg-bg text-text-primary"
+                    className="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-medium bg-bg border border-border text-text-secondary group-hover:text-text-primary transition-colors duration-150"
                   >
                     {item}
                   </span>
                 ))}
               </div>
-            </div>
-          ))}
-        </div>
+            </motion.div>
+          )}
+        </motion.div>
       </div>
     </section>
   );
@@ -354,14 +593,14 @@ function TestimonialsPreview() {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: shouldReduce ? 0 : 0.07
-      }
-    }
+        staggerChildren: shouldReduce ? 0 : 0.07,
+      },
+    },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 16 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
   };
 
   return (
@@ -376,11 +615,15 @@ function TestimonialsPreview() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: '-100px' }}
           className="grid grid-cols-1 lg:grid-cols-3 gap-5"
         >
           {featured.map((t) => (
-            <motion.div key={t.id} variants={itemVariants} className="card p-6 flex flex-col justify-between">
+            <motion.div
+              key={t.id}
+              variants={itemVariants}
+              className="card p-6 flex flex-col justify-between"
+            >
               <div>
                 <div className="flex items-center gap-0.5 mb-4">
                   {Array.from({ length: t.rating }).map((_, i) => (
@@ -397,14 +640,16 @@ function TestimonialsPreview() {
                 </div>
                 <div>
                   <div className="text-sm font-semibold text-text-primary">{t.name}</div>
-                  <div className="text-xs text-text-secondary">{t.title}, {t.company}</div>
+                  <div className="text-xs text-text-secondary">
+                    {t.title}, {t.company}
+                  </div>
                 </div>
               </div>
             </motion.div>
           ))}
         </motion.div>
         <div className="mt-10 text-left sm:text-center">
-          <Link to="/testimonials" className="btn-secondary">
+          <Link to="/testimonials" className="btn-secondary rounded-full">
             View All Testimonials
           </Link>
         </div>
@@ -415,30 +660,100 @@ function TestimonialsPreview() {
 
 // ─── Clients Logos ────────────────────────────────────────────────────────────
 function ClientLogos() {
-  return (
-    <section className="section-padding-sm bg-bg border-t border-border">
-      <div className="container-xl">
-        <p className="text-xs font-mono font-medium tracking-widest uppercase text-text-secondary mb-8">
-          Trusted by 200+ companies across India
-        </p>
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4">
-          {CLIENTS.map((client) => (
+  const shouldReduce = useReducedMotion();
+
+  const half = Math.ceil(CLIENTS.length / 2);
+  const row1 = CLIENTS.slice(0, half);
+  const row2 = CLIENTS.slice(half);
+
+  const MarqueeRow = ({ items, direction = 1 }) => {
+    const doubled = [...items, ...items];
+
+    return (
+      <div className="relative overflow-hidden">
+        {/* fade edges — on the row wrapper itself */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-24 z-10 bg-gradient-to-r from-bg to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-24 z-10 bg-gradient-to-l from-bg to-transparent" />
+
+        <motion.div
+          className="flex gap-2 sm:gap-3 w-max"
+          animate={
+            shouldReduce
+              ? {}
+              : {
+                  x: direction === 1 ? ['0%', '-50%'] : ['-50%', '0%'],
+                }
+          }
+          transition={{
+            duration: items.length * 6,
+            ease: 'linear',
+            repeat: Infinity,
+            repeatType: 'loop',
+          }}
+        >
+          {doubled.map((client, i) => (
             <div
-              key={client.id}
-              className="card p-4 flex items-center justify-start gap-3 hover:border-accent group"
+              key={`${client.id}-${i}`}
+              className="flex items-center gap-2 sm:gap-2.5 px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg sm:rounded-xl border border-border bg-bg select-none shrink-0"
             >
-              <div className="w-8 h-8 rounded bg-bg-subtle flex items-center justify-center font-headings font-bold text-text-secondary group-hover:text-accent group-hover:bg-accent-subtle transition-colors duration-150 text-xs">
-                {client.abbr.slice(0, 1)}
+              <div className="w-5 h-5 sm:w-6 sm:h-6 rounded sm:rounded-md bg-accent/10 flex items-center justify-center shrink-0">
+                <span className="text-[9px] sm:text-[10px] font-bold text-accent leading-none">
+                  {client.abbr.slice(0, 1)}
+                </span>
               </div>
-              <div className="text-xs font-semibold text-text-primary leading-tight">{client.name}</div>
+              <span className="text-[11px] sm:text-xs font-medium text-text-secondary whitespace-nowrap">
+                {client.name}
+              </span>
             </div>
           ))}
+        </motion.div>
+      </div>
+    );
+  };
+
+  return (
+    <section className="relative section-padding-sm bg-bg border-t border-border overflow-hidden">
+      <div className="container-xl">
+        <div className="flex items-center gap-2.5 mb-6 sm:mb-8">
+          <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
+          <p className="text-[10px] sm:text-[11px] font-semibold tracking-widest uppercase text-text-secondary">
+            Trusted by 200+ companies across India
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-2 sm:gap-3">
+          <MarqueeRow items={row1} direction={1} />
+          <MarqueeRow items={row2} direction={-1} />
         </div>
       </div>
     </section>
   );
-}
 
+  return (
+    <section className="relative section-padding-sm bg-bg border-t border-border overflow-hidden">
+      <div className="container-xl">
+        <div className="flex items-center gap-2.5 mb-6 sm:mb-8">
+          <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
+          <p className="text-[10px] sm:text-[11px] font-semibold tracking-widest uppercase text-text-secondary">
+            Trusted by 200+ companies across India
+          </p>
+        </div>
+
+        {/* on mobile show only 1 row, both rows on sm+ */}
+        <div className="flex flex-col gap-2 sm:gap-3">
+          <MarqueeRow items={row1} direction={1} />
+          <div className="hidden sm:block">
+            <MarqueeRow items={row2} direction={-1} />
+          </div>
+        </div>
+      </div>
+
+      {/* narrower fade on mobile, wider on desktop */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-12 sm:w-24 bg-gradient-to-r from-bg to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-12 sm:w-24 bg-gradient-to-l from-bg to-transparent" />
+    </section>
+  );
+}
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function HomePage() {
   return (

@@ -1,5 +1,7 @@
 export const NAV_LINKS = [
   // { label: 'Home', path: '/' },
+  { label: 'About', path: '/about' },
+
   {
     label: 'Services',
     path: '/services',
@@ -11,7 +13,6 @@ export const NAV_LINKS = [
       { label: 'Networking Solutions', path: '/services#networking' },
     ],
   },
-  { label: 'About', path: '/about' },
   { label: 'Clients', path: '/clients' },
   { label: 'Testimonials', path: '/testimonials' },
   { label: 'Contact', path: '/contact' },
