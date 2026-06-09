@@ -17,7 +17,10 @@ export default defineConfig({
           if (id.includes('node_modules/react-dom') || id.includes('node_modules/react/')) {
             return 'vendor';
           }
-          if (id.includes('node_modules/react-router-dom') || id.includes('node_modules/react-router/')) {
+          if (
+            id.includes('node_modules/react-router-dom') ||
+            id.includes('node_modules/react-router/')
+          ) {
             return 'router';
           }
           if (id.includes('node_modules/framer-motion')) {
