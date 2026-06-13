@@ -10,7 +10,6 @@ const AboutPage        = lazy(() => import('../pages/About'));
 const ServicesPage     = lazy(() => import('../pages/Services'));
 const ITInfraPage      = lazy(() => import('../pages/ITInfrastructure'));
 const ClientsPage      = lazy(() => import('../pages/Clients'));
-const TestimonialsPage = lazy(() => import('../pages/Testimonials'));
 const ContactPage      = lazy(() => import('../pages/Contact'));
 const NotFoundPage     = lazy(() => import('../pages/NotFound'));
 
@@ -20,7 +19,6 @@ const AdminDashboardPage     = lazy(() => import('../pages/Admin/Dashboard'));
 const AdminServicesPage      = lazy(() => import('../pages/Admin/ServicesManager'));
 const AdminSubServicesPage   = lazy(() => import('../pages/Admin/SubServicesManager'));
 const AdminSupportPlansPage  = lazy(() => import('../pages/Admin/SupportPlansManager'));
-const AdminTestimonialsPage  = lazy(() => import('../pages/Admin/TestimonialsManager'));
 const AdminStatsPage         = lazy(() => import('../pages/Admin/StatsManager'));
 const AdminAuditLogsPage     = lazy(() => import('../pages/Admin/AuditLogsViewer'));
 const AdminUsersPage         = lazy(() => import('../pages/Admin/UserManager'));
@@ -54,7 +52,6 @@ const router = createBrowserRouter([
       { path: 'services',       element: withSuspense(ServicesPage) },
       { path: 'it-infrastructure', element: withSuspense(ITInfraPage) },
       { path: 'clients',        element: withSuspense(ClientsPage) },
-      { path: 'testimonials',   element: withSuspense(TestimonialsPage) },
       { path: 'contact',        element: withSuspense(ContactPage) },
       { path: '*',              element: withSuspense(NotFoundPage) },
     ],
@@ -75,7 +72,6 @@ const router = createBrowserRouter([
       { path: 'services', element: withSuspense(AdminServicesPage) },
       { path: 'sub-services', element: withSuspense(AdminSubServicesPage) },
       { path: 'support-plans', element: withSuspense(AdminSupportPlansPage) },
-      { path: 'testimonials', element: withSuspense(AdminTestimonialsPage) },
       { path: 'stats', element: withSuspense(AdminStatsPage) },
       { 
         path: 'audit-logs', 

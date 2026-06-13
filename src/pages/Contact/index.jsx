@@ -41,9 +41,13 @@ function ContactInfoCard({ item }) {
         <p className="text-[10px] font-semibold tracking-widest uppercase text-text-tertiary mb-1">
           {item.label}
         </p>
-        <p className="text-sm font-semibold text-text-primary truncate">{item.value}</p>
+        <p className="text-sm font-semibold text-text-primary break-words whitespace-normal">
+          {item.value}
+        </p>
         {item.value2 && (
-          <p className="text-xs text-text-secondary mt-0.5 truncate">{item.value2}</p>
+          <p className="text-xs text-text-secondary mt-0.5 break-words whitespace-normal">
+            {item.value2}
+          </p>
         )}
       </div>
 
@@ -277,12 +281,11 @@ export default function ContactPage() {
                   Get in Touch
                 </h2>
                 <p className="text-sm text-text-secondary leading-relaxed">
-                  Our team of enterprise IT consultants is available during business hours and for
-                  emergency support 24×7.
+                  Our team of enterprise IT consultants is available during business hours.
                 </p>
               </div>
 
-              <div className="space-y-3">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-3">
                 {CONTACT_INFO.map((item) => (
                   <ContactInfoCard key={item.label} item={item} />
                 ))}
@@ -305,7 +308,7 @@ export default function ContactPage() {
 
             {/* Right: form */}
             <div className="lg:col-span-3">
-              <div className="card p-8 lg:p-10 bg-bg">
+              <div className="card p-5 sm:p-8 lg:p-10 bg-bg">
                 <div className="mb-8">
                   <h2 className="font-headings text-xl font-bold text-text-primary mb-1">
                     Send Us a Message

@@ -38,19 +38,19 @@ export const THEME = {
 export const WHY_CHOOSE_US = [
   {
     icon: 'Award',
-    title: '12+ Years of Excellence',
+    title: '10+ Years of Excellence',
     description:
-      'Over a decade delivering enterprise IT solutions with a track record that speaks for itself — 200+ satisfied clients and 500+ successful projects.',
+      'Over a decade delivering enterprise IT solutions with a track record that speaks for itself — 25+ satisfied clients and 75+ successful projects.',
   },
   {
     icon: 'Clock',
-    title: '24×7 Proactive Support',
+    title: '4hr Avg. Response Time',
     description:
-      'Our NOC team monitors your environment round the clock. We identify and resolve issues before they become business problems.',
+      'We prioritize rapid response and minimal downtime, ensuring your business stays operational. Our team identifies and resolves issues before they escalate.',
   },
   {
     icon: 'Users',
-    title: 'Certified Engineers',
+    title: 'Experienced Team',
     description:
       'Our team holds certifications from Cisco, Microsoft, VMware, AWS, and other industry leaders — ensuring best-practice implementations.',
   },
@@ -58,7 +58,7 @@ export const WHY_CHOOSE_US = [
     icon: 'Shield',
     title: 'Security-First Approach',
     description:
-      'Every solution we deploy incorporates security by design. We don\'t treat security as an add-on — it\'s fundamental to our architecture.',
+      "Every solution we deploy incorporates security by design. We don't treat security as an add-on — it's fundamental to our architecture.",
   },
   {
     icon: 'TrendingUp',
@@ -70,7 +70,7 @@ export const WHY_CHOOSE_US = [
     icon: 'FileCheck',
     title: 'Transparent & Accountable',
     description:
-      'Clear SLAs, regular reporting, and honest communication. You always know the status of your IT environment and what we\'re doing about it.',
+      "Clear SLAs, regular reporting, and honest communication. You always know the status of your IT environment and what we're doing about it.",
   },
 ];
 
@@ -80,5 +80,15 @@ export const TECH_STACK = [
   { category: 'Virtualization', items: ['VMware', 'Microsoft Hyper-V', 'Proxmox', 'Nutanix'] },
   { category: 'Cloud', items: ['AWS', 'Microsoft Azure', 'Google Cloud', 'Oracle Cloud'] },
   { category: 'Security', items: ['Sophos', 'CrowdStrike', 'Darktrace', 'Splunk', 'Qualys'] },
-  { category: 'OS & Software', items: ['Windows Server', 'RHEL / CentOS', 'Ubuntu', 'Active Directory'] },
+  {
+    category: 'OS & Software',
+    items: ['Windows Server', 'RHEL / CentOS', 'Ubuntu', 'Active Directory'],
+  },
+];
+
+export const STATS = [
+  { value: '75+', label: 'Projects Delivered' },
+  { value: '25+', label: 'Enterprise Clients' },
+  { value: '99.9%', label: 'Average Uptime SLA' },
+  { value: '10+', label: 'Years of Experience' },
 ];

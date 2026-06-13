@@ -32,12 +32,6 @@ export const SEO = {
       '200+ enterprise clients across BFSI, healthcare, manufacturing, retail, and logistics trust Pratham Tech Care for their IT needs.',
     keywords: 'Pratham Tech Care clients, enterprise IT clients Mumbai, IT case studies',
   },
-  testimonials: {
-    title: `Client Testimonials — ${SITE_CONFIG.name}`,
-    description:
-      'Real feedback from enterprise clients who trust Pratham Tech Care for their critical IT infrastructure and managed services.',
-    keywords: 'Pratham Tech Care reviews, IT company testimonials, enterprise IT feedback',
-  },
   contact: {
     title: `Contact Us — ${SITE_CONFIG.name}`,
     description:

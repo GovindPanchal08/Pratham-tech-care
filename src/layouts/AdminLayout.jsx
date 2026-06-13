@@ -36,7 +36,6 @@ export default function AdminLayout() {
     { label: 'Services', path: '/admin/services', icon: Server },
     { label: 'Sub-Services', path: '/admin/sub-services', icon: Sliders },
     { label: 'Support Plans', path: '/admin/support-plans', icon: DollarSign },
-    { label: 'Testimonials', path: '/admin/testimonials', icon: MessageSquare },
     { label: 'Stats', path: '/admin/stats', icon: BarChart3 },
   ];
 

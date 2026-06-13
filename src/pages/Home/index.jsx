@@ -25,14 +25,13 @@ import {
   Star,
   ArrowUpRight,
 } from 'lucide-react';
-
+import * as LucideIcons from 'lucide-react';
 import SEOHead from '../../components/common/SEOHead';
 import SectionHeader from '../../components/common/SectionHeader';
 import CTABanner from '../../components/sections/CTABanner';
-import heroImg from '../../assets/hero.png';
+import heroImg from '../../assets/IT.png';
 import { SEO } from '../../constants/seo';
 import { SERVICES } from '../../constants/services';
-import { TESTIMONIALS } from '../../constants/testimonials';
 import { CLIENTS, INDUSTRIES } from '../../constants/clients';
 import { WHY_CHOOSE_US, TECH_STACK } from '../../constants/theme';
 import React from 'react';
@@ -59,13 +58,37 @@ const iconMap = {
   Home: HomeIcon,
 };
 
-function DynamicIcon({ name, size = 20, strokeWidth = 1.5, className }) {
-  const IconComponent = iconMap[name];
-  if (!IconComponent) return null;
-  return <IconComponent size={size} strokeWidth={strokeWidth} className={className} />;
-}
+const PROCESS = [
+  {
+    step: '01',
+    title: 'Understand',
+    desc: 'We assess your business requirements and existing IT challenges.',
+  },
+  {
+    step: '02',
+    title: 'Plan',
+    desc: 'We recommend practical and cost-effective technology solutions.',
+  },
+  {
+    step: '03',
+    title: 'Implement',
+    desc: 'We deploy infrastructure, hardware, networking, and security systems efficiently.',
+  },
+  {
+    step: '04',
+    title: 'Support',
+    desc: 'We provide ongoing technical support and AMC services to keep your operations running smoothly.',
+  },
+];
+const DynamicIcon = ({ name, size = 20, className = '' }) => {
+  const IconComponent = LucideIcons[name];
+  if (!IconComponent) {
+    return <LucideIcons.HelpCircle size={size} className={className} />;
+  }
 
-// ─── Hero ────────────────────────────────────────────────────────────────────
+  return <IconComponent size={size} className={className} />;
+};
+
 function Hero() {
   const shouldReduce = useReducedMotion();
 
@@ -97,9 +120,9 @@ function Hero() {
             {/* Title */}
             <motion.h1
               variants={itemVariants}
-              className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text-primary tracking-tight leading-[1.1] mb-6"
+              className="font-headings text-3xl sm:text-4xl lg:text-5xl font-extrabold text-text-primary tracking-tight leading-[1.1] mb-6"
             >
-              Enterprise IT Solutions Built for Reliability.
+              Empowering Businesses Through Reliable IT Solutions.
             </motion.h1>
 
             {/* Subtext */}
@@ -107,22 +130,17 @@ function Hero() {
               variants={itemVariants}
               className="text-sm sm:text-base text-text-secondary leading-relaxed max-w-xl mb-8 font-sans"
             >
-              Pratham Tech Care delivers enterprise IT infrastructure, managed services,
-              cybersecurity, and cloud solutions engineered for uptime and scale.
+              Helping organizations stay connected, secure, and productive through dependable
+              technology services and expert technical support. We take the complexity out of IT, so
+              businesses can focus on what matters most — growth and success.
             </motion.p>
 
             {/* Buttons */}
             <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-4 mb-10">
-              <Link
-                to="/contact"
-                className="px-6 py-3 bg-accent hover:bg-accent/80 text-white dark:bg-accent dark:hover:bg-accent/80 dark:text-white font-sans font-bold text-sm rounded-full transition-all duration-150 shadow-md active:scale-[0.98]"
-              >
+              <Link to="/contact" className="btn-primary rounded-full">
                 Get a Free Consultation
               </Link>
-              <Link
-                to="/services"
-                className="px-6 py-3  text-slate-900 border border-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-white dark:border-slate-700 font-sans font-bold text-sm rounded-full transition-all duration-150 active:scale-[0.98]"
-              >
+              <Link to="/services" className="btn-secondary rounded-full bg-transparent">
                 Explore Services
               </Link>
             </motion.div>
@@ -134,7 +152,7 @@ function Hero() {
             >
               <div>
                 <div className="font-display text-2xl sm:text-3xl font-semibold text-text-primary">
-                  540+
+                  75+
                 </div>
                 <div className="text-[10px] sm:text-xs font-semibold text-text-secondary mt-1">
                   Projects
@@ -142,7 +160,7 @@ function Hero() {
               </div>
               <div>
                 <div className="font-display text-2xl sm:text-3xl font-semibold text-text-primary">
-                  12+
+                  10+
                 </div>
                 <div className="text-[10px] sm:text-xs font-semibold text-text-secondary mt-1">
                   Years of Experience``
@@ -158,7 +176,7 @@ function Hero() {
               </div>
               <div>
                 <div className="font-display text-2xl sm:text-3xl font-semibold text-text-primary">
-                  200+
+                  25+
                 </div>
                 <div className="text-[10px] sm:text-xs font-semibold text-text-secondary mt-1">
                   Clients
@@ -196,7 +214,6 @@ function Hero() {
   );
 }
 
-// ─── Services Grid ────────────────────────────────────────────────────────────
 function ServicesGrid() {
   const shouldReduce = useReducedMotion();
 
@@ -219,7 +236,7 @@ function ServicesGrid() {
       <div className="container-xl">
         <SectionHeader
           tag="What We Do"
-          title="Complete IT Services for Enterprise"
+          title="Complete Technology Solutions for Modern Businesses"
           subtitle="From infrastructure design to 24×7 managed support — we handle your entire IT ecosystem so you can focus on your business."
         />
         <motion.div
@@ -253,13 +270,12 @@ function ServicesGrid() {
   );
 }
 
-// ─── Why Choose Us ────────────────────────────────────────────────────────────
 function WhyUs() {
   const shouldReduce = useReducedMotion();
   const highlights = WHY_CHOOSE_US.slice(0, 3);
 
   const proofPoints = [
-    { value: '200+', label: 'Businesses Served' },
+    { value: '25+', label: 'Businesses Served' },
     { value: '4hr', label: 'Avg. Response Time' },
     { value: '8+', label: 'Years of Experience' },
   ];
@@ -269,7 +285,7 @@ function WhyUs() {
       <div className="container-xl">
         <SectionHeader
           tag="Why Pratham Tech Care"
-          title="The IT Partner You Can Rely On"
+          title="Reliable Technology. Trusted Support."
           subtitle="Deep expertise. Real commitment. Measurable outcomes."
         />
 
@@ -343,7 +359,6 @@ function WhyUs() {
   );
 }
 
-// ─── Industries ────────────────────────────────────────────────────────────────
 function Industries() {
   const shouldReduce = useReducedMotion();
 
@@ -394,201 +409,8 @@ function Industries() {
   );
 }
 
-// ─── Tech Stack ────────────────────────────────────────────────────────────────
 function TechExpertise() {
   const shouldReduce = useReducedMotion();
-
-  return (
-    <section className="section-padding bg-bg border-y border-border">
-      <div className="container-xl">
-        {/* header — Stripe/Linear style left-aligned with right side descriptor */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16">
-          <SectionHeader
-            tag={'Technology Expertise'}
-            title={'We Work With the Best '}
-            subtitle={
-              'Our certified engineers are proficient with leading technology platforms across networking, servers, cloud, and security.'
-            }
-          />
-        </div>
-
-        {/* masonry — asymmetric 2 col on left, 1 tall on right */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: shouldReduce ? 0 : 0.07 } },
-          }}
-          className="grid grid-cols-1 lg:grid-cols-3 gap-4"
-        >
-          {/* left col — 2 stacked */}
-          <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {TECH_STACK.slice(0, 4).map((category, i) => (
-              <motion.div
-                key={category.category}
-                variants={
-                  shouldReduce
-                    ? {}
-                    : {
-                        hidden: { opacity: 0, y: 14 },
-                        visible: {
-                          opacity: 1,
-                          y: 0,
-                          transition: { duration: 0.35, ease: 'easeOut' },
-                        },
-                      }
-                }
-                whileHover={shouldReduce ? {} : { y: -3, transition: { duration: 0.18 } }}
-                className="group relative bg-bg-subtle border border-border rounded-2xl p-6 overflow-hidden hover:border-accent/25 transition-colors duration-200"
-              >
-                <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-accent/35 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                <div className="flex items-start justify-between mb-4">
-                  <h3 className="font-headings font-semibold text-text-primary text-sm leading-snug">
-                    {category.category}
-                  </h3>
-                  <span className="text-[10px] font-semibold tracking-widest text-text-tertiary">
-                    0{i + 1}
-                  </span>
-                </div>
-
-                <div className="flex flex-wrap gap-1.5">
-                  {category.items.map((item) => (
-                    <span
-                      key={item}
-                      className="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-medium bg-bg border border-border text-text-secondary group-hover:text-text-primary transition-colors duration-150"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* right col — 1 tall feature card */}
-          {TECH_STACK[4] && (
-            <motion.div
-              variants={
-                shouldReduce
-                  ? {}
-                  : {
-                      hidden: { opacity: 0, y: 14 },
-                      visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
-                    }
-              }
-              whileHover={shouldReduce ? {} : { y: -3, transition: { duration: 0.18 } }}
-              className="group relative bg-accent rounded-2xl p-7 overflow-hidden flex flex-col lg:row-span-2"
-            >
-              {/* background texture */}
-              <div
-                className="absolute inset-0 opacity-10"
-                style={{
-                  backgroundImage:
-                    'radial-gradient(circle at 20% 20%, white 1px, transparent 1px), radial-gradient(circle at 80% 80%, white 1px, transparent 1px)',
-                  backgroundSize: '32px 32px',
-                }}
-              />
-              <div className="absolute -bottom-16 -right-16 w-48 h-48 rounded-full bg-white/5" />
-              <div className="absolute -top-8 -left-8 w-32 h-32 rounded-full bg-white/5" />
-
-              <div className="relative flex flex-col flex-1">
-                <div className="flex items-start justify-between mb-8">
-                  <span className="text-[10px] font-semibold tracking-widest uppercase text-white/60">
-                    0{TECH_STACK.indexOf(TECH_STACK[4]) + 1}
-                  </span>
-                  <div className="w-8 h-8 rounded-lg bg-white/15 flex items-center justify-center">
-                    <DynamicIcon
-                      name={TECH_STACK[4].icon ?? 'Shield'}
-                      size={15}
-                      className="text-white"
-                    />
-                  </div>
-                </div>
-
-                <h3 className="font-headings font-bold text-white text-xl leading-snug mb-3">
-                  {TECH_STACK[4].category}
-                </h3>
-                <p className="text-sm text-white/70 leading-relaxed mb-8">
-                  Enterprise-grade solutions built on industry-leading platforms.
-                </p>
-
-                <div className="flex flex-wrap gap-2 flex-1">
-                  {TECH_STACK[4].items.map((item) => (
-                    <span
-                      key={item}
-                      className="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-medium bg-white/10 border border-white/15 text-white/90"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="mt-8 pt-5 border-t border-white/15 flex items-center justify-between">
-                  <p className="text-xs text-white/60">{TECH_STACK[4].items.length} platforms</p>
-                  <div className="w-7 h-7 rounded-full bg-white/15 flex items-center justify-center">
-                    <DynamicIcon name="ArrowUpRight" size={13} className="text-white" />
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          )}
-
-          {/* bottom wide card — if 6th category exists */}
-          {TECH_STACK[5] && (
-            <motion.div
-              variants={
-                shouldReduce
-                  ? {}
-                  : {
-                      hidden: { opacity: 0, y: 14 },
-                      visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
-                    }
-              }
-              whileHover={shouldReduce ? {} : { y: -3, transition: { duration: 0.18 } }}
-              className="group relative lg:col-span-2 bg-bg-subtle border border-border rounded-2xl p-6 overflow-hidden hover:border-accent/25 transition-colors duration-200"
-            >
-              <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-accent/35 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-5">
-                <div>
-                  <span className="text-[10px] font-semibold tracking-widest text-text-tertiary block mb-1.5">
-                    0{TECH_STACK.length}
-                  </span>
-                  <h3 className="font-headings font-semibold text-text-primary text-sm">
-                    {TECH_STACK[5].category}
-                  </h3>
-                </div>
-                <span className="text-xs text-text-tertiary shrink-0">
-                  {TECH_STACK[5].items.length} technologies
-                </span>
-              </div>
-
-              <div className="flex flex-wrap gap-1.5">
-                {TECH_STACK[5].items.map((item) => (
-                  <span
-                    key={item}
-                    className="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-medium bg-bg border border-border text-text-secondary group-hover:text-text-primary transition-colors duration-150"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-// ─── Testimonials Preview ──────────────────────────────────────────────────────
-function TestimonialsPreview() {
-  const shouldReduce = useReducedMotion();
-  const featured = TESTIMONIALS.slice(0, 3);
-
   const containerVariants = {
     hidden: {},
     visible: {
@@ -604,61 +426,152 @@ function TestimonialsPreview() {
   };
 
   return (
-    <section className="section-padding bg-bg">
+    <section className="section-padding bg-bg-subtle border-t border-border overflow-hidden">
       <div className="container-xl">
         <SectionHeader
-          tag="Client Stories"
-          title="Trusted by Enterprise Teams"
-          subtitle="Don't take our word for it. Here's what business leaders say about working with Pratham Tech Care."
+          tag="Our Process"
+          title="How We Work With You"
+          subtitle="A simple, transparent engagement model — from understanding your needs to keeping you supported long-term."
         />
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          className="grid grid-cols-1 lg:grid-cols-3 gap-5"
-        >
-          {featured.map((t) => (
-            <motion.div
-              key={t.id}
-              variants={itemVariants}
-              className="card p-6 flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center gap-0.5 mb-4">
-                  {Array.from({ length: t.rating }).map((_, i) => (
-                    <Star key={i} size={14} fill="currentColor" className="text-amber-400" />
-                  ))}
+
+        {/* desktop — horizontal flow */}
+        <div className="hidden lg:block relative mt-2">
+          <div className="absolute top-7 left-0 right-0 h-px bg-border" />
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={
+              shouldReduce
+                ? { duration: 0 }
+                : { duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.2 }
+            }
+            style={{ originX: 0 }}
+            className="absolute top-7 left-0 right-0 h-px bg-accent/40"
+          />
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-4 gap-6"
+          >
+            {PROCESS.map((step, i) => (
+              <motion.div
+                key={step.step}
+                variants={
+                  shouldReduce
+                    ? {}
+                    : {
+                        hidden: { opacity: 0, y: 16 },
+                        visible: {
+                          opacity: 1,
+                          y: 0,
+                          transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+                        },
+                      }
+                }
+                whileHover="hover"
+                initial="rest"
+                animate="rest"
+                className="group relative"
+              >
+                {/* number node */}
+                <motion.div
+                  variants={{
+                    rest: { scale: 1, rotate: 0 },
+                    hover: { scale: shouldReduce ? 1 : 1.1, rotate: shouldReduce ? 0 : -6 },
+                  }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
+                  className="relative z-10 w-14 h-14 rounded-2xl bg-bg border border-border flex items-center justify-center mb-5 group-hover:border-accent/40 group-hover:bg-accent transition-colors duration-200"
+                >
+                  <span className="font-headings font-bold text-base text-accent group-hover:text-white transition-colors duration-200">
+                    {step.step}
+                  </span>
+                </motion.div>
+
+                {/* title with underline sweep */}
+                <h3 className="font-headings font-bold text-text-primary text-base leading-snug mb-1.5 relative inline-block">
+                  {step.title}
+                  <motion.span
+                    variants={{ rest: { scaleX: 0 }, hover: { scaleX: shouldReduce ? 0 : 1 } }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                    style={{ originX: 0 }}
+                    className="absolute -bottom-0.5 left-0 right-0 h-[1.5px] bg-accent"
+                  />
+                </h3>
+                <motion.p
+                  variants={{ rest: { opacity: 1, x: 0 }, hover: { x: shouldReduce ? 0 : 2 } }}
+                  transition={{ duration: 0.2 }}
+                  className="text-sm text-text-secondary leading-relaxed"
+                >
+                  {step.desc}
+                </motion.p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* mobile / tablet — horizontal scroll snap */}
+        <div className="lg:hidden mt-2">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 -mx-4 px-4 scrollbar-hide"
+          >
+            {PROCESS.map((step, i) => (
+              <motion.div
+                key={step.step}
+                variants={
+                  shouldReduce
+                    ? {}
+                    : {
+                        hidden: { opacity: 0, x: 16 },
+                        visible: {
+                          opacity: 1,
+                          x: 0,
+                          transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
+                        },
+                      }
+                }
+                whileTap={shouldReduce ? {} : { scale: 0.97 }}
+                transition={{ duration: 0.15 }}
+                className="snap-start shrink-0 w-[78%] sm:w-[45%] bg-bg border border-border rounded-2xl p-5 active:border-accent/40 transition-colors duration-200"
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <motion.div
+                    whileTap={shouldReduce ? {} : { rotate: -6 }}
+                    transition={{ duration: 0.2 }}
+                    className="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center"
+                  >
+                    <span className="font-headings font-bold text-sm text-accent">{step.step}</span>
+                  </motion.div>
+                  <span className="text-[10px] font-semibold tracking-widest text-text-tertiary">
+                    {String(i + 1).padStart(2, '0')} / {String(PROCESS.length).padStart(2, '0')}
+                  </span>
                 </div>
-                <blockquote className="text-sm text-text-secondary leading-relaxed italic mb-6">
-                  "{t.quote.slice(0, 180)}..."
-                </blockquote>
-              </div>
-              <div className="pt-4 border-t border-border flex items-center gap-3">
-                <div className="w-9 h-9 rounded-full bg-accent-subtle flex items-center justify-center font-headings font-bold text-accent text-xs">
-                  {t.avatar}
-                </div>
-                <div>
-                  <div className="text-sm font-semibold text-text-primary">{t.name}</div>
-                  <div className="text-xs text-text-secondary">
-                    {t.title}, {t.company}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-        <div className="mt-10 text-left sm:text-center">
-          <Link to="/testimonials" className="btn-secondary rounded-full">
-            View All Testimonials
-          </Link>
+                <h3 className="font-headings font-bold text-text-primary text-base leading-snug mb-1.5">
+                  {step.title}
+                </h3>
+                <p className="text-sm text-text-secondary leading-relaxed">{step.desc}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <div className="flex items-center justify-center gap-1.5 mt-4">
+            {PROCESS.map((step) => (
+              <span key={step.step} className="w-1.5 h-1.5 rounded-full bg-border" />
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-// ─── Clients Logos ────────────────────────────────────────────────────────────
 function ClientLogos() {
   const shouldReduce = useReducedMotion();
 
@@ -717,7 +630,7 @@ function ClientLogos() {
         <div className="flex items-center gap-2.5 mb-6 sm:mb-8">
           <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
           <p className="text-[10px] sm:text-[11px] font-semibold tracking-widest uppercase text-text-secondary">
-            Trusted by 200+ companies across India
+            Trusted by 25+ companies across India
           </p>
         </div>
 
@@ -754,7 +667,7 @@ function ClientLogos() {
     </section>
   );
 }
-// ─── Page ─────────────────────────────────────────────────────────────────────
+
 export default function HomePage() {
   return (
     <>
@@ -764,7 +677,6 @@ export default function HomePage() {
       <WhyUs />
       <Industries />
       <TechExpertise />
-      <TestimonialsPreview />
       <ClientLogos />
       <CTABanner />
     </>

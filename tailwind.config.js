@@ -8,9 +8,11 @@ export default {
         'bg-subtle': 'var(--bg-subtle)',
         'text-primary': 'var(--text-primary)',
         'text-secondary': 'var(--text-secondary)',
+        primary: 'rgb(var(--color-primary) / <alpha-value>)',
+        secondary: 'rgb(var(--color-secondary) / <alpha-value>)',
         accent: {
-          DEFAULT: 'var(--accent)',
-          subtle: 'var(--accent-subtle)',
+          DEFAULT: 'rgb(var(--color-accent) / <alpha-value>)',
+          subtle: 'rgb(var(--color-accent-subtle) / <alpha-value>)',
         },
         border: 'var(--border)',
         brand: {

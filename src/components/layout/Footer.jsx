@@ -1,24 +1,11 @@
 import { Link } from 'react-router-dom';
-import { Cpu, Phone, Mail, MapPin } from 'lucide-react';
+import { Phone, Mail, MapPin } from 'lucide-react';
 import { SITE_CONFIG } from '../../constants/siteConfig';
 import { FOOTER_LINKS } from '../../constants/navigation';
-import {
-  FaLinkedin,
-  FaTwitter,
-  FaFacebook,
-  FaYoutube
-} from "react-icons/fa";
+import logo from '../../assets/l.png';
 
 export default function Footer() {
   const year = new Date().getFullYear();
-  const socialIcons = {
-    LinkedIn: FaLinkedin,
-    Twitter: FaTwitter,
-    Facebook: FaFacebook,
-    YouTube: FaYoutube,
-  };
-
-
 
   return (
     <footer className="bg-bg-subtle border-t border-border text-text-secondary">
@@ -27,37 +14,17 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link to="/" className="flex items-center gap-2 mb-5">
-              <Cpu className="text-accent shrink-0" size={24} strokeWidth={1.5} />
-              <span  className="font-headings font-bold text-text-primary text-lg tracking-tight">
-                Pratham Tech Care
-              </span>
+            <Link to="/" className="flex items-center mb-5 shrink-0">
+              <img
+                src={logo}
+                alt="Pratham Tech Care"
+                className="h-16 md:h-20 lg:h-25 w-auto object-contain"
+              />
             </Link>
             <p className="text-sm leading-relaxed mb-6 text-text-secondary/80">
-              Enterprise IT solutions trusted by 200+ businesses across India. Infrastructure, security, cloud, and managed services.
+              Enterprise IT solutions trusted by 25+ businesses across India. Infrastructure,
+              security, cloud, and managed services.
             </p>
-            <div className="flex items-center gap-3">
-              {[
-                { name: 'LinkedIn', href: SITE_CONFIG.social.linkedin, icon: 'LinkedIn' },
-                { name: 'Twitter', href: SITE_CONFIG.social.twitter, icon: 'Twitter' },
-                { name: 'Facebook', href: SITE_CONFIG.social.facebook, icon: 'Facebook' },
-                { name: 'YouTube', href: SITE_CONFIG.social.youtube, icon: 'YouTube' },
-              ].map((s) => {
-                const IconComponent = socialIcons[s.icon];
-                return (
-                  <a
-                    key={s.name}
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={s.name}
-                    className="w-8 h-8 flex items-center justify-center rounded-lg border border-border bg-bg hover:border-accent hover:text-accent transition-all duration-200"
-                  >
-                    {IconComponent && <IconComponent size={16} strokeWidth={1.5} />}
-                  </a>
-                );
-              })}
-            </div>
           </div>
 
           {/* Services */}

@@ -12,15 +12,15 @@ export default function SectionHeader({ tag, title, subtitle, center = false, li
       {tag && (
         <div
           className={`
-      inline-flex items-center gap-2 mb-1
-      px-4 py-1.5
-      text-xs font-medium tracking-widest uppercase
+      inline-flex items-center gap-2 mb-2
+      px-3.5 py-1
+      text-[10px] sm:text-[11px] font-semibold tracking-widest uppercase
       rounded-full border
       ${center ? 'mx-auto flex' : 'inline-flex'}
       ${
         light
-          ? 'text-white/90 bg-white/8 border-white/15'
-          : 'text-accent bg-accent/8 border-accent/15'
+          ? 'text-white/90 bg-white/10 border-white/15'
+          : 'text-secondary bg-secondary/10 border-secondary/15'
       }
     `}
         >
@@ -29,8 +29,8 @@ export default function SectionHeader({ tag, title, subtitle, center = false, li
       )}
 
       <h2
-        className={`font-display text-3xl lg:text-4xl font-bold tracking-tight text-balance ${
-          light ? 'text-white' : 'text-slate-900'
+        className={`font-headings text-3xl lg:text-4xl font-bold tracking-tight text-balance ${
+          light ? 'text-white' : 'text-text-primary'
         }`}
       >
         {title}
@@ -38,8 +38,8 @@ export default function SectionHeader({ tag, title, subtitle, center = false, li
 
       {subtitle && (
         <p
-          className={`mt-4 text-base lg:text-base leading-relaxed ${
-            light ? 'text-slate-300' : 'text-slate-500'
+          className={`mt-4 text-sm sm:text-base leading-relaxed ${
+            light ? 'text-white/75' : 'text-text-secondary'
           }`}
         >
           {subtitle}

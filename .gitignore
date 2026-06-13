@@ -25,3 +25,4 @@ dist-ssr
 
 supabase/.temp
 supabase/migrations
+*.txt

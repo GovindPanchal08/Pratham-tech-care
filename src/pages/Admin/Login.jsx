@@ -78,7 +78,7 @@ export default function Login() {
               Admin Portal
             </h1>
             <p className="text-xs text-text-secondary">
-              Sign in to manage services and testimonials
+              Sign in to manage your website content
             </p>
           </div>
 

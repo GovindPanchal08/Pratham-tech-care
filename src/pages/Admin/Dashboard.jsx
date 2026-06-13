@@ -6,7 +6,6 @@ import {
   Server,
   Sliders,
   DollarSign,
-  MessageSquare,
   History,
   ArrowRight,
   Shield,
@@ -51,16 +50,7 @@ export default function Dashboard() {
     },
   });
 
-  const { data: testimonialsCount = 0, isLoading: loadingTestimonials } = useQuery({
-    queryKey: ['testimonials-count'],
-    queryFn: async () => {
-      const { count, error } = await supabase
-        .from('testimonials')
-        .select('*', { count: 'exact', head: true });
-      if (error) throw error;
-      return count || 0;
-    },
-  });
+
 
   const { data: recentLogs = [], isLoading: loadingLogs } = useQuery({
     queryKey: ['recent-logs'],
@@ -81,7 +71,6 @@ export default function Dashboard() {
     { label: 'Services', value: servicesCount, loading: loadingServices, icon: Server, color: 'text-blue-500 bg-blue-500/10 border-blue-500/20', link: '/admin/services' },
     { label: 'Sub-Services', value: subServicesCount, loading: loadingSubServices, icon: Sliders, color: 'text-indigo-500 bg-indigo-500/10 border-indigo-500/20', link: '/admin/sub-services' },
     { label: 'Support Plans', value: plansCount, loading: loadingPlans, icon: DollarSign, color: 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20', link: '/admin/support-plans' },
-    { label: 'Testimonials', value: testimonialsCount, loading: loadingTestimonials, icon: MessageSquare, color: 'text-amber-500 bg-amber-500/10 border-amber-500/20', link: '/admin/testimonials' },
   ];
 
   return (
@@ -100,7 +89,7 @@ export default function Dashboard() {
               Hello, {profile?.email?.split('@')[0]}!
             </h1>
             <p className="text-sm text-text-secondary mt-1 max-w-xl">
-              You are logged in as an authorized content editor. Use this portal to manage your services listings, sub-services capabilities, support tiers, testimonials quotes, and counter stats.
+              You are logged in as an authorized content editor. Use this portal to manage your services listings, sub-services capabilities, support tiers, and counter stats.
             </p>
           </div>
         </div>
@@ -230,13 +219,6 @@ export default function Dashboard() {
               className="flex items-center justify-between p-3 rounded-lg border border-border hover:border-accent/30 bg-bg hover:bg-bg-subtle text-xs font-semibold transition-colors duration-150"
             >
               <span>Configure Sub-services</span>
-              <ArrowRight size={14} className="text-text-secondary" />
-            </Link>
-            <Link
-              to="/admin/testimonials"
-              className="flex items-center justify-between p-3 rounded-lg border border-border hover:border-accent/30 bg-bg hover:bg-bg-subtle text-xs font-semibold transition-colors duration-150"
-            >
-              <span>Add Client Testimonial</span>
               <ArrowRight size={14} className="text-text-secondary" />
             </Link>
           </div>

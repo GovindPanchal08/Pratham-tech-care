@@ -4,50 +4,16 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Cpu, Phone, Menu, X, ChevronDown } from 'lucide-react';
 import { NAV_LINKS } from '../../constants/navigation';
 import { SITE_CONFIG } from '../../constants/siteConfig';
+import logo from '../../assets/l.png';
 
-// function Logo() {
-//   return (
-//     <Link to="/" className="flex items-center gap-2.5 group" aria-label={SITE_CONFIG.name}>
-//       {/* icon mark */}
-//       <div className="relative w-8 h-8 shrink-0">
-//         {/* outer ring */}
-//         <div className="absolute inset-0 rounded-xl bg-accent/10 group-hover:bg-accent/15 transition-colors duration-200" />
-//         {/* inner dot grid — 2x2 */}
-//         <div className="absolute inset-0 flex items-center justify-center">
-//           <div className="grid grid-cols-2 gap-[3px]">
-//             <div className="w-[7px] h-[7px] rounded-[2px] bg-accent" />
-//             <div className="w-[7px] h-[7px] rounded-[2px] bg-accent/40" />
-//             <div className="w-[7px] h-[7px] rounded-[2px] bg-accent/40" />
-//             <div className="w-[7px] h-[7px] rounded-[2px] bg-accent" />
-//           </div>
-//         </div>
-//       </div>
-
-//       {/* wordmark */}
-//       <div className="flex flex-col leading-none gap-[3px]">
-//         <span className="font-headings font-extrabold text-text-primary text-[15px] tracking-tight">
-//           Pratham
-//         </span>
-//         <span className="font-sans font-medium text-text-tertiary text-[10px] tracking-[0.15em] uppercase">
-//           Tech Care
-//         </span>
-//       </div>
-//     </Link>
-//   );
-// }
 function Logo() {
   return (
-    <Link to="/" className="flex items-center gap-2.5 group" aria-label={SITE_CONFIG.name}>
-      {/* mark — two overlapping squares, offset */}
-      <div className="relative shrink-0 w-[22px] h-[22px]">
-        <div className="absolute top-0 left-0 w-[14px] h-[14px] rounded-[3px] bg-accent" />
-        <div className="absolute bottom-0 right-0 w-[14px] h-[14px] rounded-[3px] border-2 border-accent bg-transparent group-hover:bg-accent/10 transition-colors duration-200" />
-      </div>
-
-      {/* wordmark */}
-      <span className="font-headings font-bold text-[15px] text-text-primary tracking-[-0.03em]">
-        Pratham Tech Care
-      </span>
+    <Link to="/" className="flex items-center shrink-0 w-48" aria-label={SITE_CONFIG.name}>
+      <img
+        src={logo}
+        alt="Pratham Tech Care"
+        className="h-20 sm:h-28 w-auto object-contain mt-3 "
+      />
     </Link>
   );
 }
@@ -101,6 +67,18 @@ export default function Navbar() {
     setMobileOpen(false);
     setActiveDropdown(null);
   }, [location]);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileOpen]);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -195,98 +173,182 @@ export default function Navbar() {
           </div>
 
           {/* Mobile menu button */}
-          <button
+          <motion.button
             className="lg:hidden p-2 text-text-secondary hover:text-text-primary rounded-lg transition-colors duration-150"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileOpen}
+            whileTap={shouldReduce ? {} : { scale: 0.9 }}
           >
-            {mobileOpen ? <X size={20} strokeWidth={1.5} /> : <Menu size={20} strokeWidth={1.5} />}
-          </button>
+            <AnimatePresence mode="wait" initial={false}>
+              {mobileOpen ? (
+                <motion.span
+                  key="close"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="block"
+                >
+                  <X size={20} strokeWidth={1.5} />
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="menu"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="block"
+                >
+                  <Menu size={20} strokeWidth={1.5} />
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </motion.button>
         </nav>
       </div>
 
-      {/* Mobile drawer */}
+      {/* Mobile drawer with backdrop */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={shouldReduce ? { duration: 0 } : { duration: 0.2, ease: 'easeInOut' }}
-            className="lg:hidden overflow-hidden border-t border-border bg-bg"
-          >
-            <div className="container-xl py-6 px-4 space-y-4 flex flex-col min-h-[calc(100vh-4rem)] justify-between">
-              <div className="space-y-4">
-                {NAV_LINKS.map((link) => (
-                  <div key={link.path} className="space-y-2">
-                    {link.children ? (
-                      <>
-                        <div className="text-xs font-sans font-medium tracking-widest uppercase text-text-secondary/50">
-                          {link.label}
-                        </div>
-                        <div className="pl-4 space-y-2">
-                          {link.children.map((child) => (
-                            <NavLink
-                              key={child.path}
-                              to={child.path}
-                              onClick={() => setMobileOpen(false)}
-                              className={({ isActive }) =>
-                                `block py-2 text-sm transition-colors ${
-                                  isActive
-                                    ? 'text-accent font-medium'
-                                    : 'text-text-secondary hover:text-accent'
-                                }`
-                              }
-                            >
-                              {child.label}
-                            </NavLink>
-                          ))}
-                        </div>
-                      </>
-                    ) : (
-                      <NavLink
-                        to={link.path}
-                        onClick={() => setMobileOpen(false)}
-                        className={({ isActive }) =>
-                          `block py-2 text-base font-medium transition-colors ${
-                            isActive
-                              ? 'text-accent font-semibold'
-                              : 'text-text-secondary hover:text-accent'
-                          }`
-                        }
-                      >
-                        {link.label}
-                      </NavLink>
-                    )}
-                  </div>
-                ))}
-              </div>
+          <>
+            {/* Backdrop overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="lg:hidden fixed inset-0 top-16 bg-black/30 backdrop-blur-sm z-30"
+              onClick={() => setMobileOpen(false)}
+            />
 
-              <div className="pt-6 border-t border-border flex flex-col gap-4">
-                <a
-                  href={`tel:${SITE_CONFIG.phone.replace(/\s/g, '')}`}
-                  className="flex items-center justify-center gap-1.5 text-sm font-medium text-text-secondary hover:text-accent py-2"
-                >
-                  <Phone size={16} strokeWidth={1.5} />
-                  <span>{SITE_CONFIG.phone}</span>
-                </a>
+            {/* Slide-down panel */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={
+                shouldReduce
+                  ? { duration: 0 }
+                  : { type: 'spring', stiffness: 300, damping: 30, mass: 0.8 }
+              }
+              className="lg:hidden fixed left-0 right-0 top-16 z-40 overflow-y-auto max-h-[calc(100vh-4rem)] border-t border-border bg-bg shadow-2xl"
+            >
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                variants={{
+                  hidden: {},
+                  visible: {
+                    transition: {
+                      staggerChildren: shouldReduce ? 0 : 0.06,
+                      delayChildren: shouldReduce ? 0 : 0.1,
+                    },
+                  },
+                }}
+                className="container-xl py-6 px-4 space-y-1 flex flex-col min-h-[60vh] justify-between"
+              >
+                <div className="space-y-1">
+                  {NAV_LINKS.map((link) => (
+                    <motion.div
+                      key={link.path}
+                      variants={{
+                        hidden: { opacity: 0, x: -20 },
+                        visible: { opacity: 1, x: 0 },
+                      }}
+                      transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                      className="space-y-1"
+                    >
+                      {link.children ? (
+                        <>
+                          <div className="text-xs font-sans font-medium tracking-widest uppercase text-text-secondary/50 pt-3 pb-1">
+                            {link.label}
+                          </div>
+                          <div className="pl-4 space-y-0.5">
+                            {link.children.map((child, childIdx) => (
+                              <motion.div
+                                key={child.path}
+                                variants={{
+                                  hidden: { opacity: 0, x: -12 },
+                                  visible: { opacity: 1, x: 0 },
+                                }}
+                                transition={{
+                                  type: 'spring',
+                                  stiffness: 400,
+                                  damping: 25,
+                                  delay: shouldReduce ? 0 : childIdx * 0.03,
+                                }}
+                              >
+                                <NavLink
+                                  to={child.path}
+                                  onClick={() => setMobileOpen(false)}
+                                  className={({ isActive }) =>
+                                    `block py-2.5 px-3 text-sm rounded-lg transition-all duration-200 ${
+                                      isActive
+                                        ? 'text-accent font-medium bg-accent/10'
+                                        : 'text-text-secondary hover:text-accent hover:bg-accent/5'
+                                    }`
+                                  }
+                                >
+                                  {child.label}
+                                </NavLink>
+                              </motion.div>
+                            ))}
+                          </div>
+                        </>
+                      ) : (
+                        <NavLink
+                          to={link.path}
+                          onClick={() => setMobileOpen(false)}
+                          className={({ isActive }) =>
+                            `block py-3 px-3 text-base font-medium rounded-lg transition-all duration-200 ${
+                              isActive
+                                ? 'text-accent font-semibold bg-accent/10'
+                                : 'text-text-secondary hover:text-accent hover:bg-accent/5'
+                            }`
+                          }
+                        >
+                          {link.label}
+                        </NavLink>
+                      )}
+                    </motion.div>
+                  ))}
+                </div>
+
                 <motion.div
-                  whileHover={shouldReduce ? {} : { scale: 1.02 }}
-                  whileTap={shouldReduce ? {} : { scale: 0.98 }}
-                  transition={{ duration: 0.15 }}
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0 },
+                  }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+                  className="pt-6 mt-4 border-t border-border flex flex-col gap-4"
                 >
-                  <Link
-                    to="/contact"
-                    onClick={() => setMobileOpen(false)}
-                    className="btn-primary w-full justify-center py-3 rounded-lg font-sans font-semibold text-sm"
+                  <a
+                    href={`tel:${SITE_CONFIG.phone.replace(/\s/g, '')}`}
+                    className="flex items-center justify-center gap-1.5 text-sm font-medium text-text-secondary hover:text-accent py-2 rounded-lg transition-colors duration-200 hover:bg-accent/5"
                   >
-                    Get a Quote
-                  </Link>
+                    <Phone size={16} strokeWidth={1.5} />
+                    <span>{SITE_CONFIG.phone}</span>
+                  </a>
+                  <motion.div
+                    whileHover={shouldReduce ? {} : { scale: 1.02 }}
+                    whileTap={shouldReduce ? {} : { scale: 0.97 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+                  >
+                    <Link
+                      to="/contact"
+                      onClick={() => setMobileOpen(false)}
+                      className="btn-primary w-full justify-center py-3 rounded-lg font-sans font-semibold text-sm shadow-lg shadow-accent/20"
+                    >
+                      Get a Quote
+                    </Link>
+                  </motion.div>
                 </motion.div>
-              </div>
-            </div>
-          </motion.div>
+              </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </header>

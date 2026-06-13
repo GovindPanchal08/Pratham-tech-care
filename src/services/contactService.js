@@ -13,7 +13,10 @@ export async function submitContactForm(data) {
     await new Promise((resolve) => setTimeout(resolve, 1400));
     // Simulate occasional error for testing:
     // if (Math.random() < 0.2) throw new Error('Network error');
-    return { success: true, message: 'Your message has been received. We\'ll be in touch within 24 hours.' };
+    return {
+      success: true,
+      message: "Your message has been received. We'll be in touch within 24 hours.",
+    };
   }
   const response = await api.post('/contact', data);
   return response.data;

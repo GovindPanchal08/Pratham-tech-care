@@ -26,7 +26,7 @@ export const CONTACT_INFO = [
     icon: 'Clock',
     label: 'Business Hours',
     value: 'Mon–Sat: 9:00 AM – 7:00 PM',
-    value2: 'Emergency Support: 24×7',
+    // value2: 'Emergency Support: 24×7',
   },
 ];
 

@@ -1,5 +1,5 @@
 export const NAV_LINKS = [
-  // { label: 'Home', path: '/' },
+  { label: 'Home', path: '/' },
   { label: 'About', path: '/about' },
 
   {
@@ -7,30 +7,30 @@ export const NAV_LINKS = [
     path: '/services',
     children: [
       { label: 'IT Infrastructure', path: '/it-infrastructure' },
-      { label: 'Managed IT Services', path: '/services#managed' },
-      { label: 'Cybersecurity', path: '/services#security' },
-      { label: 'Cloud Support', path: '/services#cloud' },
       { label: 'Networking Solutions', path: '/services#networking' },
+      { label: 'IT Hardware Solutions & Support', path: '/it-infrastructure#servers' },
+      { label: 'Surveillance & Access Control Solutions', path: '/services#security' },
+      { label: 'Software Licensing', path: '/services#cloud' },
+      { label: 'Technical Support & AMC Services', path: '/services#support' },
     ],
   },
   { label: 'Clients', path: '/clients' },
-  { label: 'Testimonials', path: '/testimonials' },
   { label: 'Contact', path: '/contact' },
 ];
 
 export const FOOTER_LINKS = {
   services: [
     { label: 'IT Infrastructure', path: '/it-infrastructure' },
-    { label: 'Managed IT Services', path: '/services#managed' },
     { label: 'Networking Solutions', path: '/services#networking' },
-    { label: 'Server Deployment', path: '/it-infrastructure#servers' },
-    { label: 'Cybersecurity', path: '/services#security' },
-    { label: 'Cloud Support', path: '/services#cloud' },
+    { label: 'IT Hardware Solutions & Support', path: '/it-infrastructure#servers' },
+    { label: 'Surveillance & Access Control Solutions', path: '/services#security' },
+    { label: 'Software Licensing', path: '/services#cloud' },
+    { label: 'Technical Support & AMC Services', path: '/services#support' },
   ],
   company: [
+    { label: 'Home', path: '/' },
     { label: 'About Us', path: '/about' },
     { label: 'Our Clients', path: '/clients' },
-    { label: 'Testimonials', path: '/testimonials' },
     { label: 'Contact Us', path: '/contact' },
   ],
   legal: [
@@ -38,3 +38,4 @@ export const FOOTER_LINKS = {
     { label: 'Terms of Service', path: '/terms' },
   ],
 };
+s;

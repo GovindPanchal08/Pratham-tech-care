@@ -182,7 +182,7 @@ export default function StatsManager() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-xl font-bold tracking-tight text-text-primary">Manage Counters & Stats</h1>
-          <p className="text-xs text-text-secondary">Configure company counter milestones displayed on About and Testimonials pages.</p>
+          <p className="text-xs text-text-secondary">Configure company counter milestones displayed on the About page.</p>
         </div>
         {isEditor && (
           <button onClick={handleOpenAdd} className="btn-primary flex items-center gap-1.5 py-2 px-4 text-xs">

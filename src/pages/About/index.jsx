@@ -6,29 +6,29 @@ import SectionHeader from '../../components/common/SectionHeader';
 import CTABanner from '../../components/sections/CTABanner';
 import { SEO } from '../../constants/seo';
 import { SITE_CONFIG } from '../../constants/siteConfig';
-import { STATS } from '../../constants/testimonials';
+import { STATS } from '../../constants/theme';
 import { WHY_CHOOSE_US } from '../../constants/theme';
 
 const VALUES = [
   {
     icon: 'Shield',
-    title: 'Integrity',
-    desc: 'We are transparent in our pricing, honest in our assessments, and accountable for our commitments. No hidden costs, no overengineered solutions.',
+    title: 'Integrity & Transparency',
+    desc: 'We believe in honest communication, fair practices, and building trust through accountability.',
   },
   {
     icon: 'Award',
-    title: 'Excellence',
-    desc: 'We hold ourselves to the highest technical and service standards. Our engineers are certified, our processes are documented, and our results are measurable.',
+    title: 'Technical Excellence',
+    desc: 'We maintain high standards of technical expertise across infrastructure, networking, hardware, and support services.',
   },
   {
     icon: 'Users',
-    title: 'Partnership',
-    desc: 'We invest in long-term relationships. We understand your business, proactively identify risks, and grow as your technology partner.',
+    title: 'Long-Term Partnership',
+    desc: 'Long-Term Partnerships means building lasting relationships with clients by providing dependable service, consistent support, and solutions that grow with their business needs.',
   },
   {
     icon: 'TrendingUp',
-    title: 'Innovation',
-    desc: "We stay ahead of the technology curve so our clients don't have to. We continuously evaluate new solutions that deliver real business value.",
+    title: 'Continuous Improvement',
+    desc: 'We continuously enhance our knowledge, processes, and service quality to better support our clients.',
   },
 ];
 
@@ -96,8 +96,8 @@ export default function AboutPage() {
       <SEOHead {...SEO.about} />
       <PageHero
         tag="About Us"
-        title="Built on Trust, Driven by Technology"
-        subtitle={`Founded in ${SITE_CONFIG.founded}, Pratham Tech Care has grown from a Mumbai-based IT support firm into a full-scale enterprise technology partner serving 200+ clients across India.`}
+        title="Built on Trust. Focused on Solutions."
+        subtitle={`Since ${SITE_CONFIG.founded}, Pratham Tech Care has evolved from a local Mumbai IT support provider into a trusted enterprise technology partner for businesses across India.`}
         breadcrumbs={[{ label: 'About Us' }]}
       />
 
@@ -128,20 +128,30 @@ export default function AboutPage() {
 
               <div className="space-y-4">
                 <p className="text-sm text-text-secondary leading-relaxed">
-                  Pratham Tech Care was founded in {SITE_CONFIG.founded} by Amit Pratham, with a
-                  simple belief: that businesses of all sizes deserve enterprise-grade IT support —
-                  not just the largest corporations.
+                  Pratham Techcare Pvt. Ltd. was established with a vision to provide businesses and
+                  individuals with reliable, practical, and cost-effective technology solutions.
+                  While the company is newly founded, it is built on a strong foundation of industry
+                  expertise and long-standing client relationships.
                 </p>
                 <p className="text-sm text-text-secondary leading-relaxed">
-                  What began as a hardware support and networking firm has evolved into a
-                  comprehensive technology partner offering the full spectrum of IT services — from
-                  infrastructure design and managed support to cybersecurity and cloud
-                  transformation.
+                  Led by Prathamesh, who brings over {SITE_CONFIG.experience} of experience in IT
+                  infrastructure, networking, hardware support, and technical services. Pratham
+                  Techcare continues a journey of serving clients who have trusted his expertise for
+                  nearly a decade. Over the years, he has successfully supported MNCs, corporate
+                  organizations, small and medium enterprises and individual users with dependable
+                  technology solutions tailored to their unique requirements.
                 </p>
                 <p className="text-sm text-text-secondary leading-relaxed">
-                  Today, with a team of {SITE_CONFIG.employees} certified engineers and consultants,
-                  we serve clients across BFSI, healthcare, manufacturing, retail, and dozens of
-                  other verticals.
+                  At Pratham Techcare, we believe technology should empower businesses, not
+                  complicate them. From IT infrastructure and networking to hardware support,
+                  software licensing, surveillance systems, and AMC services, we help organizations
+                  build secure, efficient, and uninterrupted IT environments that support smooth
+                  day-to-day operations and long-term growth.
+                </p>
+                <p className="text-sm text-text-secondary leading-relaxed">
+                  Our commitment is simple: deliver quality service, build lasting relationships,
+                  and be a technology partner our clients can rely on at every stage of their
+                  journey.
                 </p>
               </div>
             </motion.div>
@@ -233,9 +243,8 @@ export default function AboutPage() {
               </h3>
 
               <p className="text-sm text-text-secondary leading-relaxed flex-1">
-                To be the technology partner that businesses across India rely on — not just for
-                technical support, but for strategic guidance in navigating an increasingly complex
-                digital landscape.
+                To become a trusted technology partner by delivering reliable, scalable, and
+                customer-focused IT solutions.
               </p>
 
               <div className="mt-8 pt-5 border-t border-border flex items-center justify-between">
@@ -293,9 +302,8 @@ export default function AboutPage() {
               </h3>
 
               <p className="relative text-sm text-white/75 leading-relaxed flex-1">
-                To deliver reliable, secure, and scalable IT infrastructure and services that reduce
-                operational friction, protect business assets, and enable our clients to compete and
-                grow with confidence.
+                To empower businesses with robust IT infrastructure, quality hardware, and
+                responsive support services that ensure uninterrupted operations.
               </p>
 
               <div className="relative mt-8 pt-5 border-t border-white/15 flex items-center justify-between">
@@ -335,59 +343,6 @@ export default function AboutPage() {
                   {v.title}
                 </h3>
                 <p className="text-xs text-text-secondary leading-relaxed">{v.desc}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Leadership */}
-      <section className="section-padding bg-bg-subtle border-t border-border">
-        <div className="container-xl">
-          <SectionHeader
-            tag="Leadership"
-            title="The Team Behind Our Success"
-            subtitle="Our leadership team brings decades of combined experience from enterprise IT across India and globally."
-          />
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4"
-          >
-            {TEAM.map((member, i) => (
-              <motion.div
-                key={member.name}
-                variants={itemVariants}
-                whileHover={{ y: -3, transition: { duration: 0.18 } }}
-                className="group relative bg-bg border border-border rounded-2xl p-6 overflow-hidden hover:border-accent/30 transition-colors duration-200 flex flex-col items-center text-center"
-              >
-                {/* top glow */}
-                <div className="absolute top-0 left-5 right-5 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                {/* index */}
-                <span className="absolute top-4 right-4 text-[10px] font-semibold tracking-widest text-text-tertiary">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-
-                {/* avatar */}
-                <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mb-5 group-hover:bg-accent/15 transition-colors duration-200">
-                  <span className="font-headings font-bold text-accent text-base">
-                    {member.initials}
-                  </span>
-                </div>
-
-                {/* name + title */}
-                <h3 className="font-headings font-semibold text-text-primary text-sm leading-snug mb-1">
-                  {member.name}
-                </h3>
-                <p className="text-[11px] text-accent font-medium mb-4">{member.title}</p>
-
-                {/* exp strip */}
-                <div className="mt-auto w-full pt-4 border-t border-border">
-                  <p className="text-[10px] text-text-tertiary">{member.exp}</p>
-                </div>
               </motion.div>
             ))}
           </motion.div>

@@ -10,6 +10,7 @@ import {
   Home as HomeIcon,
   CheckCircle,
 } from 'lucide-react';
+import * as LucideIcons from 'lucide-react';
 
 import SEOHead from '../../components/common/SEOHead';
 import PageHero from '../../components/common/PageHero';
@@ -17,7 +18,8 @@ import SectionHeader from '../../components/common/SectionHeader';
 import CTABanner from '../../components/sections/CTABanner';
 import { SEO } from '../../constants/seo';
 import { CLIENTS, INDUSTRIES, CASE_STUDIES } from '../../constants/clients';
-
+import ClientDirectory from '../../components/sections/ClientDirectory';
+import { SITE_CONFIG } from '../../constants/siteConfig';
 const iconMap = {
   Building2,
   Heart,
@@ -29,11 +31,14 @@ const iconMap = {
   Home: HomeIcon,
 };
 
-function DynamicIcon({ name, size = 20, strokeWidth = 1.5, className }) {
-  const IconComponent = iconMap[name];
-  if (!IconComponent) return null;
-  return <IconComponent size={size} strokeWidth={strokeWidth} className={className} />;
-}
+const DynamicIcon = ({ name, size = 20, className = '' }) => {
+  const IconComponent = LucideIcons[name];
+  if (!IconComponent) {
+    return <LucideIcons.HelpCircle size={size} className={className} />;
+  }
+
+  return <IconComponent size={size} className={className} />;
+};
 
 const COLOR_MAP = {
   brand: {
@@ -78,8 +83,8 @@ export default function ClientsPage() {
       <SEOHead {...SEO.clients} />
       <PageHero
         tag="Our Clients"
-        title="Trusted by 200+ Enterprises"
-        subtitle="From financial services to healthcare, manufacturing to retail — businesses across India rely on Pratham Tech Care for mission-critical IT."
+        title={`Trusted by ${SITE_CONFIG.clients} Enterprises`}
+        subtitle={`From financial services to healthcare, manufacturing to retail — businesses across India rely on ${SITE_CONFIG.name} for mission-critical IT.`}
         breadcrumbs={[{ label: 'Clients' }]}
       />
       {/* Client Grid */}
@@ -90,43 +95,8 @@ export default function ClientsPage() {
             title="Companies That Trust Us"
             subtitle="A selection of the businesses we partner with across industries and geographies."
           />
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3"
-          >
-            {CLIENTS.map((client, i) => (
-              <motion.div
-                key={client.id}
-                variants={itemVariants}
-                whileHover={{ y: -3, transition: { duration: 0.18 } }}
-                className="group relative bg-bg-subtle border border-border rounded-2xl p-5 overflow-hidden hover:border-accent/30 transition-colors duration-200"
-              >
-                {/* top glow */}
-                <div className="absolute top-0 left-5 right-5 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                {/* index */}
-                <p className="text-[10px] font-semibold tracking-widest text-text-tertiary mb-3">
-                  {String(i + 1).padStart(2, '0')}
-                </p>
-
-                {/* abbr */}
-                <div className="w-10 h-10 rounded-xl bg-bg border border-border flex items-center justify-center mb-4 group-hover:border-accent/30 group-hover:bg-accent/5 transition-colors duration-200">
-                  <span className="text-sm font-bold font-headings text-text-secondary group-hover:text-accent transition-colors duration-200">
-                    {client.abbr.slice(0, 2)}
-                  </span>
-                </div>
-
-                {/* name + industry */}
-                <p className="font-headings font-semibold text-text-primary text-sm leading-snug mb-1 truncate">
-                  {client.name}
-                </p>
-                <p className="text-[11px] text-text-tertiary truncate">{client.industry}</p>
-              </motion.div>
-            ))}
-          </motion.div>
+          <ClientDirectory />
         </div>
       </section>
 
@@ -155,7 +125,7 @@ export default function ClientsPage() {
                 {/* index + icon row */}
                 <div className="flex items-start justify-between mb-5">
                   <div className="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center group-hover:bg-accent/15 transition-colors duration-200 shrink-0">
-                    <DynamicIcon name={industry.icon} size={18} className="text-accent" />
+                    <DynamicIcon name={industry?.icon} size={18} className="text-accent" />
                   </div>
                   <span className="text-[10px] font-semibold tracking-widest text-text-tertiary">
                     {String(i + 1).padStart(2, '0')}

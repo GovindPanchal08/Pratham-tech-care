@@ -8,10 +8,7 @@ import PageHero from '../../components/common/PageHero';
 import SectionHeader from '../../components/common/SectionHeader';
 import CTABanner from '../../components/sections/CTABanner';
 import { SEO } from '../../constants/seo';
-import {
-  INFRASTRUCTURE_SERVICES as STATIC_INFRASTRUCTURE_SERVICES,
-  SUPPORT_PLANS as STATIC_SUPPORT_PLANS,
-} from '../../constants/services';
+import { INFRASTRUCTURE_SERVICES, SUPPORT_PLANS } from '../../constants/services';
 
 function DynamicIcon({ name, size = 20, strokeWidth = 1.5, className }) {
   const IconComponent = LucideIcons[name] || LucideIcons.HelpCircle;
@@ -25,14 +22,14 @@ export default function ITInfrastructurePage() {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: shouldReduce ? 0 : 0.07
-      }
-    }
+        staggerChildren: shouldReduce ? 0 : 0.07,
+      },
+    },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 16 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
   };
 
   return (
@@ -61,12 +58,21 @@ export default function ITInfrastructurePage() {
             className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"
           >
             {INFRASTRUCTURE_SERVICES.map((svc) => (
-              <motion.div key={svc.id} id={svc.id} variants={itemVariants} className="card p-6 hover:border-accent group">
+              <motion.div
+                key={svc.id}
+                id={svc.id}
+                variants={itemVariants}
+                className="card p-6 hover:border-accent group"
+              >
                 <div className="w-10 h-10 rounded-md bg-accent-subtle text-accent flex items-center justify-center mb-4">
                   <DynamicIcon name={svc.icon} />
                 </div>
-                <h3 className="font-headings font-semibold text-text-primary text-base mb-2">{svc.title}</h3>
-                <p className="text-sm text-text-secondary leading-relaxed mb-4">{svc.description}</p>
+                <h3 className="font-headings font-semibold text-text-primary text-base mb-2">
+                  {svc.title}
+                </h3>
+                <p className="text-sm text-text-secondary leading-relaxed mb-4">
+                  {svc.description}
+                </p>
                 <ul className="space-y-1.5 border-t border-border pt-4">
                   {svc.specs.map((spec) => (
                     <li key={spec} className="flex items-center gap-2 text-xs text-text-secondary">
@@ -109,31 +115,41 @@ export default function ITInfrastructurePage() {
                   </div>
                 )}
                 <div>
-                  <h3 className={`font-headings font-bold text-lg ${plan.highlight ? 'text-white' : 'text-text-primary'}`}>
+                  <h3
+                    className={`font-headings font-bold text-lg ${plan.highlight ? 'text-white' : 'text-text-primary'}`}
+                  >
                     {plan.name}
                   </h3>
                   <div className="flex items-baseline gap-0.5 mt-2 mb-4">
-                    <span className={`font-headings text-3xl font-bold ${plan.highlight ? 'text-white' : 'text-text-primary'}`}>
+                    <span
+                      className={`font-headings text-3xl font-bold ${plan.highlight ? 'text-white' : 'text-text-primary'}`}
+                    >
                       {plan.price}
                     </span>
                     {plan.period && (
-                      <span className={`text-xs font-mono ml-1 ${plan.highlight ? 'text-white/80' : 'text-text-secondary/80'}`}>
+                      <span
+                        className={`text-xs font-mono ml-1 ${plan.highlight ? 'text-white/80' : 'text-text-secondary/80'}`}
+                      >
                         {plan.period}
                       </span>
                     )}
                   </div>
-                  <p className={`text-xs leading-relaxed mb-6 ${plan.highlight ? 'text-white/85' : 'text-text-secondary'}`}>
+                  <p
+                    className={`text-xs leading-relaxed mb-6 ${plan.highlight ? 'text-white/85' : 'text-text-secondary'}`}
+                  >
                     {plan.description}
                   </p>
                   <ul className="space-y-2.5 mb-8 border-t border-current/10 pt-4">
                     {plan.features.map((f) => (
                       <li key={f} className="flex items-start gap-2">
-                        <Check
+                        <LucideIcons.Check
                           size={14}
                           strokeWidth={1.5}
                           className={`shrink-0 mt-0.5 ${plan.highlight ? 'text-white' : 'text-accent'}`}
                         />
-                        <span className={`text-xs leading-relaxed ${plan.highlight ? 'text-white/90' : 'text-text-secondary'}`}>
+                        <span
+                          className={`text-xs leading-relaxed ${plan.highlight ? 'text-white/90' : 'text-text-secondary'}`}
+                        >
                           {f}
                         </span>
                       </li>
