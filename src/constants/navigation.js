@@ -38,4 +38,3 @@ export const FOOTER_LINKS = {
     { label: 'Terms of Service', path: '/terms' },
   ],
 };
-s;
